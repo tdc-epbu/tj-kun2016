@@ -8,8 +8,12 @@ public enum TravelType {
  * 倒立振子 ON/OFF
  *
  */
-	straght(1,1,0,1),
-	curve(1,1,0,1);
+	straght (1,1,0,1),
+	curve   (1,1,0,1),
+	jaggy   (0,1,0,1),
+	lookup  (1,1,1,0),
+	tailstop(1,1,1,0),
+	back    (1,0,0,1);
 
 	private final int id_pid;
 	private final int id_trace;
