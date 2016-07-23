@@ -4,7 +4,7 @@ public enum TravelType {
 /*
  * PID制御 ON/OFF
  * ライントレース ON/OFF
- * 尻尾 上げ/下げ
+ * 尻尾 下げ/上げ
  * 倒立振子 ON/OFF
  *
  */

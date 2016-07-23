@@ -6,9 +6,9 @@ import lejos.utility.Stopwatch;
 
 public class TravelImpl implements Travel {
 
-	float P_GAIN; // Kp 0.6～0.95(推薦値)
-	float I_GAIN; // Ki 0.6～0.7(推薦値)
-	float D_GAIN; // Kd 0.3～0.45(推薦値)
+	float P_GAIN = 0.9F; // Kp 0.6～0.95(推薦値)
+	float I_GAIN = 0.0F; // Ki 0.6～0.7(推薦値)
+	float D_GAIN = 0.3F; // Kd 0.3～0.45(推薦値)
 	float targetLight; // 目標値
 	float diff[] = new float[2]; // 差分
 	float integral; // 積分
@@ -16,34 +16,52 @@ public class TravelImpl implements Travel {
 	int SPEED = 100; // 速度の比例定数 例：1の場合1倍の速度　2の場合1/2の速度
 	private Stopwatch stopwatch;
 	int maxPid = 50;
+	EV3 ev3 = EV3.getInstance();
+	private static final float LIGHT_WHITE = 0.4F; // 白色のカラーセンサー輝度値
+	private static final float LIGHT_BLACK = 0.0F; // 黒色のカラーセンサー輝度値
+	private static final float THRESHOLD = (LIGHT_WHITE+LIGHT_BLACK)/2.0F; // ライントレースの閾値
 
 	public void travel(TravelType type,WheelSpeed speed) {
+		// PID制御 ON/OFF
 		int idPid = type.getIdPid();
+		// ライントレース ON/OFF
 		int idTrace = type.getIdTrace();
+		// 尻尾 下げ/上げ
 		int idTail = type.getIdTail();
+		// 倒立振子 ON/OFF
 		int idThrow = type.getIdThrow();
 
-		EV3 ev3 = EV3.getInstance();
-		float forward = 50.0F; // 前後進命令
+		float forward = speed.getWheelSpeedScaleLeft(); // 前後進命令
+		float motorLeft = speed.getWheelSpeedScaleLeft(); // 左モーターパワー
+		float motorRight = speed.getWheelSpeedScaleRight(); // 右モーターパワー
 		float turn = 0.0F; // 旋回命令
 		int tail = 0;
 
 		if (idPid == 1) {
-			CalcTurnValue(ev3.getBrightness());
+			turn = CalcTurnValue(ev3.getBrightness());
+		} else if(idPid == 0) {
+			turn = jaggyTravel();
 		}
 
 		if (idTrace == 1) {
+
+		} else if(idTrace == 0) {
 
 		}
 
 		if (idTail == 1) {
 			tail = 110;
+		} else if(idThrow == 0) {
+			tail = 0;
 		}
 
 		if (idThrow == 1) {
+			// 倒立振子制御
+			ev3.controlBalance(forward, turn ,tail);
+		} else if(idThrow == 0) {
+			// 直接制御
 
 		}
-		ev3.controlBalance(forward, turn ,tail);
 
 	}
 
@@ -103,5 +121,15 @@ public class TravelImpl implements Travel {
 		return value;
 	}
 
+	/**
+	 * ジグザグ走行制御
+	 */
+	public float jaggyTravel() {
+		if (ev3.getBrightness() > THRESHOLD) {
+                return 50.0F;  // 右旋回命令
+            } else {
+            	return -50.0F; // 左旋回命令
+            }
+        }
 
 }
