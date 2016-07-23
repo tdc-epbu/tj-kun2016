@@ -4,8 +4,8 @@
 package jp.co.tdc.epbu.tjkun.strategy;
 
 import jp.co.tdc.epbu.tjkun.drive.Travel;
-import jp.co.tdc.epbu.tjkun.drive.TravelImpl;
 import jp.co.tdc.epbu.tjkun.drive.TravelJaggyImpl;
+import jp.co.tdc.epbu.tjkun.drive.TravelPidImpl;
 import jp.co.tdc.epbu.tjkun.section.Course;
 import jp.co.tdc.epbu.tjkun.section.Section;
 import lejos.utility.Delay;
@@ -20,7 +20,7 @@ public class DriveStrategyImpl implements DriveStrategy {
 	public void operate(Course cource) {
 
 		//Course cource = CourceFactory.create(CourceType.LEFT);
-		Travel travel = new TravelImpl();
+		Travel travel = new TravelPidImpl();
 		Travel jaggy = new TravelJaggyImpl();
 
 		while(cource.isDriving()){

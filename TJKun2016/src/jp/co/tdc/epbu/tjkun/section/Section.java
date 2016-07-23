@@ -4,6 +4,7 @@
 package jp.co.tdc.epbu.tjkun.section;
 
 import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
+import jp.co.tdc.epbu.tjkun.measure.SectionRunActual;
 import jp.co.tdc.epbu.tjkun.strategy.TravelType;
 
 /**
