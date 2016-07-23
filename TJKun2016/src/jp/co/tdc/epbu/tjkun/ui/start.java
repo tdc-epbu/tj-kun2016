@@ -15,15 +15,18 @@ public class start {
 
 	public static void main(String[] args) {
 
+		EV3 ev3 = EV3.getInstance();
+
 		// キャリブレーション実行
-		Button button = new Button(EV3.getInstance());
-		Calibrater calibrater = new Calibrater(EV3.getInstance(), button);
+		Button button = new Button(ev3);
+		Calibrater calibrater = new Calibrater(ev3, button);
 		calibrater.calibration();
 
 		// キャリブレーション完了後、走行戦略の判定処理呼び出し
 		DriveStrategy drivestrategy = new DriveStrategyImpl();
 		drivestrategy.operate();
 
+		ev3.close();
 	}
 
 }
