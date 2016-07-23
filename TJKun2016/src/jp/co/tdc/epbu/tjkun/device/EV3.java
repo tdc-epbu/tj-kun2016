@@ -28,7 +28,7 @@ import lejos.utility.Delay;
 /**
  * EV3way本体のモータとセンサーを扱うクラス。
  */
-public class EV3 implements Runnable {
+public class EV3 implements Runnable, EV3Control {
 	public static final int TAIL_ANGLE_STAND_UP = 94; // 完全停止時の角度[度]
 	public static final int TAIL_ANGLE_DRIVE = 3; // バランス走行時の角度[度]
 
@@ -41,12 +41,14 @@ public class EV3 implements Runnable {
 	private static final Port SENSORPORT_COLOR = SensorPort.S3; // カラーセンサーポート
 	private static final Port SENSORPORT_GYRO = SensorPort.S4; // ジャイロセンサーポート
 	private static final float GYRO_OFFSET = 0.0F; // ジャイロセンサーオフセット値
-	//private static final float LIGHT_WHITE = 0.4F; // 白色のカラーセンサー輝度値
-	//private static final float LIGHT_BLACK = 0.0F; // 黒色のカラーセンサー輝度値
-	//private static final float SONAR_ALERT_DISTANCE = 0.3F; // 超音波センサーによる障害物検知距離[m]
+	// private static final float LIGHT_WHITE = 0.4F; // 白色のカラーセンサー輝度値
+	// private static final float LIGHT_BLACK = 0.0F; // 黒色のカラーセンサー輝度値
+	// private static final float SONAR_ALERT_DISTANCE = 0.3F; //
+	// 超音波センサーによる障害物検知距離[m]
 	private static final float P_GAIN = 2.5F; // 完全停止用モータ制御比例係数
 	private static final int PWM_ABS_MAX = 60; // 完全停止用モータ制御PWM絶対最大値
-	//private static final float THRESHOLD = (LIGHT_WHITE + LIGHT_BLACK) / 2.0F; // ライントレースの閾値
+	// private static final float THRESHOLD = (LIGHT_WHITE + LIGHT_BLACK) /
+	// 2.0F; // ライントレースの閾値
 
 	// モータ制御用オブジェクト
 	// EV3LargeRegulatedMotor では PWM 制御ができないので、TachoMotorPort を利用する
@@ -80,12 +82,15 @@ public class EV3 implements Runnable {
 	private float turn = 0.0f;
 	private int tail = 0;
 
-    private int         driveCallCounter = 0;
+	private int driveCallCounter = 0;
 
-    private ScheduledExecutorService scheduler;
-    private ScheduledFuture<?> futureDrive;
+	private ScheduledExecutorService scheduler;
+	private ScheduledFuture<?> futureDrive;
 
-    private boolean balance;
+	private boolean balance;
+
+	private int leftMotorPower;
+	private int rightMotorPower;
 
 	private static EV3 ev3 = null;
 
@@ -133,7 +138,7 @@ public class EV3 implements Runnable {
 		rate = gyro.getRateMode(); // 角速度検出モード
 		sampleGyro = new float[rate.sampleSize()];
 
-        scheduler  = Executors.newScheduledThreadPool(1);
+		scheduler = Executors.newScheduledThreadPool(1);
 	}
 
 	/**
@@ -167,17 +172,15 @@ public class EV3 implements Runnable {
 		Balancer.init(); // 倒立振子制御初期化
 	}
 
-
-
 	public void start() {
 		futureDrive = scheduler.scheduleAtFixedRate(this, 0, 4, TimeUnit.MILLISECONDS);
 	}
 
 	public void stop() {
 
-        if (futureDrive != null) {
-            futureDrive.cancel(true);
-        }
+		if (futureDrive != null) {
+			futureDrive.cancel(true);
+		}
 	}
 
 	/**
@@ -193,7 +196,7 @@ public class EV3 implements Runnable {
 		colorSensor.setFloodlight(false);
 		sonar.disable();
 
-        scheduler.shutdownNow();
+		scheduler.shutdownNow();
 	}
 
 	/**
@@ -227,8 +230,7 @@ public class EV3 implements Runnable {
 	/*
 	 * 走行体完全停止用モータの角度制御
 	 *
-	 * @param angle
-	 *            モータ目標角度[度]
+	 * @param angle モータ目標角度[度]
 	 */
 	private void controlTail(int angle) {
 		float pwm = (float) (angle - motorPortT.getTachoCount()) * P_GAIN; // 比例制御
@@ -276,19 +278,48 @@ public class EV3 implements Runnable {
 	@Override
 	public void run() {
 
-        if (++driveCallCounter >= 40/4) {  // 約40msごとに障害物検知
-    		distanceMode.fetchSample(sampleDistance, 0);
-    		sonarDistance = sampleDistance[0];
-            driveCallCounter = 0;
-        }
+		if (++driveCallCounter >= 40 / 4) { // 約40msごとに障害物検知
+			distanceMode.fetchSample(sampleDistance, 0);
+			sonarDistance = sampleDistance[0];
+			driveCallCounter = 0;
+		}
 
-		float gyroNow = getGyroValue(); // ジャイロセンサー値
-		int thetaL = motorPortL.getTachoCount(); // 左モータ回転角度
-		int thetaR = motorPortR.getTachoCount(); // 右モータ回転角度
-		int battery = Battery.getVoltageMilliVolt(); // バッテリー電圧[mV]
-		Balancer.control(forward, turn, gyroNow, GYRO_OFFSET, thetaL, thetaR, battery); // 倒立振子制御
-		motorPortL.controlMotor(Balancer.getPwmL(), 1); // 左モータPWM出力セット
-		motorPortR.controlMotor(Balancer.getPwmR(), 1); // 右モータPWM出力セット
+		if (balance) {
+			float gyroNow = getGyroValue(); // ジャイロセンサー値
+			int thetaL = motorPortL.getTachoCount(); // 左モータ回転角度
+			int thetaR = motorPortR.getTachoCount(); // 右モータ回転角度
+			int battery = Battery.getVoltageMilliVolt(); // バッテリー電圧[mV]
+			Balancer.control(forward, turn, gyroNow, GYRO_OFFSET, thetaL, thetaR, battery); // 倒立振子制御
+			motorPortL.controlMotor(Balancer.getPwmL(), 1); // 左モータPWM出力セット
+			motorPortR.controlMotor(Balancer.getPwmR(), 1); // 右モータPWM出力セット
+		} else {
+			motorPortL.controlMotor(this.leftMotorPower, 1); // 左モータPWM出力セット
+			motorPortR.controlMotor(this.rightMotorPower, 1); // 右モータPWM出力セット
+		}
+
 		ev3.controlTail(tail);
+	}
+
+	@Override
+	public void controlDirect(int left, int right, int tail) {
+
+		this.leftMotorPower =left;
+		this.rightMotorPower = right;
+
+		this.tail = tail;
+
+		balance = false;
+	}
+
+	@Override
+	public int getLMotorCount() {
+
+		return motorPortL.getTachoCount();
+	}
+
+	@Override
+	public int getRMotorCount() {
+
+		return motorPortR.getTachoCount();
 	}
 }
