@@ -3,6 +3,9 @@
  */
 package jp.co.tdc.epbu.tjkun.section;
 
+import jp.co.tdc.epbu.tjkun.drive.TravelType;
+import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
+
 /**
  * @author Takayuki
  *
@@ -10,16 +13,36 @@ package jp.co.tdc.epbu.tjkun.section;
 public class SectionType {
 
 
-	//speed
+	private WheelSpeed wheelspeed;
 
-	//runType
+	private TravelType travelType;
 
-
-	public void judgeAbnormal(){
-
+	SectionType(WheelSpeed wheelspeed, TravelType travelType){
+		this.wheelspeed = wheelspeed;
+		this.travelType = travelType;
 	}
 
-	public void judgeSection(){
+	/**
+	 * 異常値を判定する
+	 */
+	public void judgeAbnormal(){
+		// TODO
+	}
 
+	/**
+	 * 区間の終了を判定する
+	 * @return
+	 */
+	public boolean judgeEndOfSection(){
+		// TODO
+		return true;
+	}
+
+	public WheelSpeed getWheelspeed() {
+		return wheelspeed;
+	}
+
+	public TravelType getTravelType() {
+		return travelType;
 	}
 }
