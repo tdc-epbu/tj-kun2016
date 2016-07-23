@@ -17,7 +17,7 @@ public class SectionType {
 
 	private TravelType travelType;
 
-	SectionType(WheelSpeed wheelspeed, TravelType travelType){
+	public SectionType(WheelSpeed wheelspeed, TravelType travelType){
 		this.wheelspeed = wheelspeed;
 		this.travelType = travelType;
 	}
