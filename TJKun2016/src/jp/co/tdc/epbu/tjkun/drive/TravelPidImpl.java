@@ -2,6 +2,7 @@ package jp.co.tdc.epbu.tjkun.drive;
 
 import jp.co.tdc.epbu.tjkun.device.EV3;
 import lejos.hardware.lcd.LCD;
+import lejos.utility.Delay;
 import lejos.utility.Stopwatch;
 
 public class TravelPidImpl implements Travel {
@@ -13,15 +14,15 @@ public class TravelPidImpl implements Travel {
 	float targetLight; // 目標値
 	float diff[] = new float[2]; // 差分
 	float integral; // 積分
-	float FREQUENCY; // 周期
-	int SPEED = 100; // 速度の比例定数 例：1の場合1倍の速度　2の場合1/2の速度
 	private Stopwatch stopwatch;
 	int maxPid = 50;
 
-	public void travel(TravelType type,WheelSpeed speed) {
+	public void travel(WheelSpeed speed) {
 		float forward = speed.getWheelSpeedScaleLeft();
 		float turn = CalcTurnValue(ev3.getBrightness());
 		int tail = 0;
+
+		Delay.msDelay(4);
 		ev3.controlBalance(forward, turn ,tail);
 	}
 

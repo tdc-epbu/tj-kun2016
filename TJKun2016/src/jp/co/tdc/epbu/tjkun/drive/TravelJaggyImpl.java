@@ -9,7 +9,7 @@ public class TravelJaggyImpl implements Travel {
 	private static final float LIGHT_BLACK = 0.0F; // 黒色のカラーセンサー輝度値
 	private static final float THRESHOLD = (LIGHT_WHITE+LIGHT_BLACK)/2.0F; // ライントレースの閾値
 
-	public void travel(TravelType type,WheelSpeed speed) {
+	public void travel(WheelSpeed speed) {
 		float forward = speed.getWheelSpeedScaleLeft();
 		float turn = jaggyTravel();
 		int tail = 0;

@@ -1,8 +1,13 @@
 package jp.co.tdc.epbu.tjkun.drive;
 
 public class WheelSpeed {
-	public int wheelSpeedScaleLeft = 50;
-	public int wheelSpeedScaleRight = 50;
+	public int wheelSpeedScaleLeft;
+	public int wheelSpeedScaleRight;
+
+	public WheelSpeed (int wheelSpeedScaleLeft, int wheelSpeedScaleRight){
+		this.wheelSpeedScaleLeft = wheelSpeedScaleLeft;
+		this.wheelSpeedScaleRight = wheelSpeedScaleRight;
+	}
 	public int getWheelSpeedScaleLeft() {
 		return wheelSpeedScaleLeft;
 	}
