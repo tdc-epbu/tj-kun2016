@@ -6,6 +6,6 @@ public interface Travel {
 	TravelType travelType = TravelType.straght;
 	WheelSpeed wheelSpeed = null;
 
-	public void travel() ;
+	public void travel(TravelType type,WheelSpeed speed) ;
 
 }
