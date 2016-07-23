@@ -17,11 +17,11 @@ public class TravelImpl implements Travel {
 	private Stopwatch stopwatch;
 	int maxPid = 50;
 
-	public void travel() {
-		int idPid = travelType.getIdPid();
-		int idTrace = travelType.getIdTrace();
-		int idTail = travelType.getIdTail();
-		int idThrow = travelType.getIdThrow();
+	public void travel(TravelType type,WheelSpeed speed) {
+		int idPid = type.getIdPid();
+		int idTrace = type.getIdTrace();
+		int idTail = type.getIdTail();
+		int idThrow = type.getIdThrow();
 
 		EV3 ev3 = EV3.getInstance();
 		float forward = 50.0F; // 前後進命令
