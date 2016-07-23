@@ -6,7 +6,7 @@ package jp.co.tdc.epbu.tjkun.strategy;
 import jp.co.tdc.epbu.tjkun.drive.Travel;
 import jp.co.tdc.epbu.tjkun.drive.TravelImpl;
 import jp.co.tdc.epbu.tjkun.section.Course;
-import jp.co.tdc.epbu.tjkun.section.SectionType;
+import jp.co.tdc.epbu.tjkun.section.Section;
 import lejos.utility.Delay;
 
 /**
@@ -25,7 +25,7 @@ public class DriveStrategyImpl implements DriveStrategy {
 
 			Delay.msDelay(10);
 
-			SectionType section = cource.DecideSpeed();
+			Section section = cource.DecideSpeed();
 
 			travel.travel(section.getTravelType(), section.getWheelspeed());
 

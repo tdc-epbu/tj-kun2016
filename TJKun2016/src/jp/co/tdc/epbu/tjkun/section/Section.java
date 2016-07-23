@@ -10,16 +10,24 @@ import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
  * @author Takayuki
  *
  */
-public class SectionType {
+public class Section {
 
 
 	private WheelSpeed wheelspeed;
 
 	private TravelType travelType;
+	
+	private Condition endCondition;
+	
+	private Condition abnormalCondition;
+	
+	//private SectionRunActual sectionRunActual;
 
-	public SectionType(WheelSpeed wheelspeed, TravelType travelType){
+	public Section(WheelSpeed wheelspeed, TravelType travelType, Condition endCondition, Condition abnormalCondition){
 		this.wheelspeed = wheelspeed;
 		this.travelType = travelType;
+		this.endCondition =endCondition;
+		this.abnormalCondition = abnormalCondition;
 	}
 
 	/**

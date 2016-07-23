@@ -10,19 +10,19 @@ package jp.co.tdc.epbu.tjkun.section;
 public class Condition {
 
 	private ConditionType conditionType;
-	private float value;
+	private float conditionValue;
 	
-	public Condition(ConditionType conditionType, float value){
+	public Condition(ConditionType conditionType, float conditionValue){
 		this.conditionType = conditionType;
-		this.value = value;
+		this.conditionValue = conditionValue;
 	}
 
 	public ConditionType getConditionType() {
 		return conditionType;
 	}
 
-	public float getValue() {
-		return value;
+	public float getConditionValue() {
+		return conditionValue;
 	}
 	
 }

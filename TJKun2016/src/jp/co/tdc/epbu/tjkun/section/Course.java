@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Course {
 
-	private List<SectionType> sectionList;
+	private List<Section> sectionList;
 
 	private int driveSection = 0;
 
@@ -19,7 +19,7 @@ public class Course {
 	public Course(){
 	}
 
-	public Course(List<SectionType> sectionList){
+	public Course(List<Section> sectionList){
 		this.sectionList = sectionList;
 	}
 
@@ -27,7 +27,7 @@ public class Course {
 	 * 速度を決定する
 	 * @return
 	 */
-	public SectionType DecideSpeed(){
+	public Section DecideSpeed(){
 
 		try {
 
