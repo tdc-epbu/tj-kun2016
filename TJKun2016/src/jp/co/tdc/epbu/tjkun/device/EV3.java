@@ -10,6 +10,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import jp.co.tdc.epbu.tjkun.sample.RemoteTask;
 import jp.etrobo.ev3.balancer.Balancer;
 import lejos.hardware.Battery;
 import lejos.hardware.port.BasicMotorPort;
@@ -87,6 +88,9 @@ public class EV3 implements Runnable, EV3Control {
 	private ScheduledExecutorService scheduler;
 	private ScheduledFuture<?> futureDrive;
 
+	private ScheduledFuture<?> futureRemote;
+
+
 	private boolean balance;
 
 	private int leftMotorPower;
@@ -138,7 +142,7 @@ public class EV3 implements Runnable, EV3Control {
 		rate = gyro.getRateMode(); // 角速度検出モード
 		sampleGyro = new float[rate.sampleSize()];
 
-		scheduler = Executors.newScheduledThreadPool(1);
+		scheduler = Executors.newScheduledThreadPool(2);
 	}
 
 	/**
@@ -174,12 +178,17 @@ public class EV3 implements Runnable, EV3Control {
 
 	public void start() {
 		futureDrive = scheduler.scheduleAtFixedRate(this, 0, 4, TimeUnit.MILLISECONDS);
+		futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 10, TimeUnit.MILLISECONDS);
 	}
 
 	public void stop() {
 
 		if (futureDrive != null) {
 			futureDrive.cancel(true);
+		}
+
+		if (futureRemote != null) {
+			futureRemote.cancel(true);
 		}
 	}
 
@@ -195,6 +204,8 @@ public class EV3 implements Runnable, EV3Control {
 		motorPortT.close();
 		colorSensor.setFloodlight(false);
 		sonar.disable();
+
+		RemoteTask.getInstance().close();
 
 		scheduler.shutdownNow();
 	}
