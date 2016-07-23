@@ -3,6 +3,8 @@
  */
 package jp.co.tdc.epbu.tjkun.strategy;
 
+import jp.co.tdc.epbu.tjkun.section.Course;
+
 /**
  * @author Takayuki
  *
@@ -10,6 +12,6 @@ package jp.co.tdc.epbu.tjkun.strategy;
 public interface DriveStrategy {
 
 	/** 指示する */
-	public void operate();
+	public void operate(Course cource);
 
 }

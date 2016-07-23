@@ -21,6 +21,7 @@ public class Course {
 
 	public Course(List<Section> sectionList){
 		this.sectionList = sectionList;
+		sectionList.get(driveSection).startMeasure();
 	}
 
 	/**
@@ -61,5 +62,6 @@ public class Course {
 	private void updateSection(){
 
 		driveSection++;
+		sectionList.get(driveSection).startMeasure();
 	}
 }

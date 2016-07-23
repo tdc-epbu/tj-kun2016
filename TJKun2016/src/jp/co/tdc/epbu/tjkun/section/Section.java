@@ -3,8 +3,8 @@
  */
 package jp.co.tdc.epbu.tjkun.section;
 
-import jp.co.tdc.epbu.tjkun.drive.TravelType;
 import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
+import jp.co.tdc.epbu.tjkun.strategy.TravelType;
 
 /**
  * @author Takayuki
@@ -13,7 +13,7 @@ import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
 public class Section {
 
 
-	private WheelSpeed wheelspeed;
+	private WheelSpeed wheelSpeed;
 
 	private TravelType travelType;
 	
@@ -21,10 +21,10 @@ public class Section {
 	
 	private Condition abnormalCondition;
 	
-	//private SectionRunActual sectionRunActual;
+	private SectionRunActual sectionRunActual;
 
-	public Section(WheelSpeed wheelspeed, TravelType travelType, Condition endCondition, Condition abnormalCondition){
-		this.wheelspeed = wheelspeed;
+	public Section(WheelSpeed wheelSpeed, TravelType travelType, Condition endCondition, Condition abnormalCondition){
+		this.wheelSpeed = wheelSpeed;
 		this.travelType = travelType;
 		this.endCondition =endCondition;
 		this.abnormalCondition = abnormalCondition;
@@ -42,12 +42,16 @@ public class Section {
 	 * @return
 	 */
 	public boolean judgeEndOfSection(){
-		// TODO
-		return true;
+		return sectionRunActual.notify(endCondition);
 	}
 
+	public void startMeasure(){
+		sectionRunActual = new SectionRunActual();
+	}
+	
+	
 	public WheelSpeed getWheelspeed() {
-		return wheelspeed;
+		return wheelSpeed;
 	}
 
 	public TravelType getTravelType() {
