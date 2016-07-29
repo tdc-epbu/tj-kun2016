@@ -62,6 +62,9 @@ public class Course {
 	private void updateSection(){
 
 		driveSection++;
+		if(sectionList.size() > driveSection){
+			return;
+		}
 		sectionList.get(driveSection).startMeasure();
 	}
 }

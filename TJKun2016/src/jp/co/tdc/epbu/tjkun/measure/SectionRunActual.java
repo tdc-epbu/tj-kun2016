@@ -20,8 +20,8 @@ public class SectionRunActual {
 		switch (condition.getConditionType()){
 		case DISTANCE:
 			// 回転数
-			int nowMotorCount  = ev3Control.getLMotorCount();
-			int motorCount = nowMotorCount - initMotorCount;
+
+			int motorCount = Math.abs(ev3Control.getLMotorCount() - initMotorCount);
 			if (condition.getConditionValue() <= motorCount) {
 				notify = true;
 			}
