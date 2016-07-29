@@ -1,46 +1,48 @@
 package jp.co.tdc.epbu.tjkun.measure;
 
+import jp.co.tdc.epbu.tjkun.device.EV3Control;
 import jp.co.tdc.epbu.tjkun.section.Condition;
 import lejos.utility.Stopwatch;
 
 public class SectionRunActual {
 
-	Stopwatch time = new Stopwatch();
+	private EV3Control ev3Control;
 
-	public SectionRunActual(){
-		start();
+	Stopwatch time = new Stopwatch();
+	int initMotorCount;
+
+	public SectionRunActual(EV3Control ev3Control) {
+		this.ev3Control = ev3Control;
 	}
 
-		public boolean notify(Condition condition){
-			boolean notify = false;
+	public boolean notify(Condition condition){
+		boolean notify = false;
 		switch (condition.getConditionType()){
 		case DISTANCE:
-//			if (X >= 100000) { // 時間の基準はチューニングする必要あり
-//			res = true;
-//			return TouchStatus.Pressed;
-//			}
+			// 回転数
+			int nowMotorCount  = ev3Control.getLMotorCount();
+			int motorCount = nowMotorCount - initMotorCount;
+			if (condition.getConditionValue() <= motorCount) {
+				notify = true;
+			}
 			break;
 		case TIME:
-		// 計測開始(経過ミリ秒をコンソールに出力)
-			// 計測開始(経過ミリ秒をコンソールに出力)
+			// 時間
 			if (condition.getConditionValue() <= time.elapsed()) { // 時間の基準はチューニングする必要あり
-			notify = true;
+				notify = true;
 			}
 			break;
 		case LINE_COLOR:
-//			/未実装
+			// 未実装
 		}
-
-		//TODO 			 time.elapsed()
-		//TODO 		if(notify){
-		//TODO 		}
 
 		return notify;
-		}
-		public void start(){
+	}
+	public void start(){
 
 		time.reset();
+		this.initMotorCount  = ev3Control.getLMotorCount();
 
-		}
+	}
 }
 
