@@ -5,11 +5,6 @@
  */
 package jp.co.tdc.epbu.tjkun.device;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import jp.co.tdc.epbu.tjkun.sample.RemoteTask;
 import jp.etrobo.ev3.balancer.Balancer;
 import lejos.hardware.Battery;
@@ -85,10 +80,7 @@ public class EV3 implements Runnable, EV3Control {
 
 	private int driveCallCounter = 0;
 
-	private ScheduledExecutorService scheduler;
-	private ScheduledFuture<?> futureDrive;
 
-	private ScheduledFuture<?> futureRemote;
 
 
 	private boolean balance;
@@ -142,7 +134,7 @@ public class EV3 implements Runnable, EV3Control {
 		rate = gyro.getRateMode(); // 角速度検出モード
 		sampleGyro = new float[rate.sampleSize()];
 
-		scheduler = Executors.newScheduledThreadPool(2);
+
 	}
 
 	/**
@@ -176,28 +168,12 @@ public class EV3 implements Runnable, EV3Control {
 		Balancer.init(); // 倒立振子制御初期化
 	}
 
-	public void start() {
-		futureDrive = scheduler.scheduleAtFixedRate(this, 0, 4, TimeUnit.MILLISECONDS);
-		futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 10, TimeUnit.MILLISECONDS);
-	}
 
-	public void stop() {
-
-		if (futureDrive != null) {
-			futureDrive.cancel(true);
-		}
-
-		if (futureRemote != null) {
-			futureRemote.cancel(true);
-		}
-	}
 
 	/**
 	 * センサー、モータの終了処理。
 	 */
 	public void close() {
-
-		this.stop();
 
 		motorPortL.close();
 		motorPortR.close();
@@ -207,7 +183,6 @@ public class EV3 implements Runnable, EV3Control {
 
 		RemoteTask.getInstance().close();
 
-		scheduler.shutdownNow();
 	}
 
 	/**

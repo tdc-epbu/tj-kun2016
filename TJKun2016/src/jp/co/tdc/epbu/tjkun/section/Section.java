@@ -3,6 +3,7 @@
  */
 package jp.co.tdc.epbu.tjkun.section;
 
+import jp.co.tdc.epbu.tjkun.device.EV3;
 import jp.co.tdc.epbu.tjkun.drive.WheelSpeed;
 import jp.co.tdc.epbu.tjkun.measure.SectionRunActual;
 import jp.co.tdc.epbu.tjkun.strategy.TravelType;
@@ -17,11 +18,11 @@ public class Section {
 	private WheelSpeed wheelSpeed;
 
 	private TravelType travelType;
-	
+
 	private Condition endCondition;
-	
+
 	private Condition abnormalCondition;
-	
+
 	private SectionRunActual sectionRunActual;
 
 	public Section(WheelSpeed wheelSpeed, TravelType travelType, Condition endCondition, Condition abnormalCondition){
@@ -29,6 +30,7 @@ public class Section {
 		this.travelType = travelType;
 		this.endCondition =endCondition;
 		this.abnormalCondition = abnormalCondition;
+		this.sectionRunActual = new SectionRunActual(EV3.getInstance());
 	}
 
 	/**
@@ -47,10 +49,10 @@ public class Section {
 	}
 
 	public void startMeasure(){
-		sectionRunActual = new SectionRunActual();
+		sectionRunActual.start();
 	}
-	
-	
+
+
 	public WheelSpeed getWheelspeed() {
 		return wheelSpeed;
 	}

@@ -6,6 +6,7 @@ package jp.co.tdc.epbu.tjkun.strategy;
 import jp.co.tdc.epbu.tjkun.drive.Travel;
 import jp.co.tdc.epbu.tjkun.drive.TravelJaggyImpl;
 import jp.co.tdc.epbu.tjkun.drive.TravelPidImpl;
+import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 import jp.co.tdc.epbu.tjkun.section.Course;
 import jp.co.tdc.epbu.tjkun.section.Section;
 import lejos.utility.Delay;
@@ -16,11 +17,19 @@ import lejos.utility.Delay;
  */
 public class DriveStrategyImpl implements DriveStrategy {
 
+	private Calibrater calibrater;
+
+	public DriveStrategyImpl(Calibrater calibrater) {
+
+		this.calibrater = calibrater;
+	}
+
+
 	@Override
 	public void operate(Course cource) {
 
 		//Course cource = CourceFactory.create(CourceType.LEFT);
-		Travel travel = new TravelPidImpl();
+		Travel travel = new TravelPidImpl(this.calibrater);
 		Travel jaggy = new TravelJaggyImpl();
 
 		while(cource.isDriving()){

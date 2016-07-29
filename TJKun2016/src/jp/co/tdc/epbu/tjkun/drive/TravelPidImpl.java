@@ -1,8 +1,8 @@
 package jp.co.tdc.epbu.tjkun.drive;
 
 import jp.co.tdc.epbu.tjkun.device.EV3;
+import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 import lejos.hardware.lcd.LCD;
-import lejos.utility.Delay;
 import lejos.utility.Stopwatch;
 
 public class TravelPidImpl implements Travel {
@@ -17,13 +17,43 @@ public class TravelPidImpl implements Travel {
 	private Stopwatch stopwatch;
 	int maxPid = 50;
 
+
+	private Calibrater calibrater;
+
+
+	public TravelPidImpl(Calibrater calibrater) {
+
+		this.calibrater = calibrater;
+
+		this.targetLight = 50;
+		this.integral = 0;
+		this.diff[0] = 0;
+		this.diff[1] = 0;
+
+		stopwatch = new Stopwatch();
+
+	}
+
+
+
+
 	public void travel(WheelSpeed speed) {
 		float forward = speed.getWheelSpeedScaleLeft();
-		float turn = CalcTurnValue(ev3.getBrightness());
+		float turn = CalcTurnValue(getBrightnessValue());
 		int tail = 0;
 
-		Delay.msDelay(4);
 		ev3.controlBalance(forward, turn ,tail);
+	}
+
+
+	public float getBrightnessValue() {
+
+		float temp = ev3.getBrightness();
+
+		LCD.drawString(Float.toString(temp), 0, 1);
+
+		return (((temp - calibrater.blackBaseline()) / (calibrater.whiteBaseline() - calibrater.blackBaseline()))
+				* 100.0f);
 	}
 
 	/**
