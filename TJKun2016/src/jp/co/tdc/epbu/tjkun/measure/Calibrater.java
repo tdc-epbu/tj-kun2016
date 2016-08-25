@@ -30,11 +30,16 @@ public class Calibrater {
 		LCD.drawString("Get Black...  ", 0, 4);
 
 		blackBaseline = getBrightnessForTouchWait();
-
+		LCD.drawString("Black:" + blackBaseline, 0, 5);
+		
+		
 		LCD.drawString("Get White...  ", 0, 4);
-
+		
 
 		whiteBaseline = getBrightnessForTouchWait();
+		LCD.drawString("White:" + whiteBaseline, 0, 6);
+		
+		
 	}
 
 	private float getBrightnessForTouchWait() {
