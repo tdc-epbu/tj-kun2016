@@ -25,7 +25,7 @@ public class PIDDriver implements Driveable {
 		this.ev3Control = ev3Control;
 		this.calibrater = calibrater;
 
-		this.targetLight = 50;
+		this.targetLight = 60;
 		this.integral = 0;
 		this.diff[0] = 0;
 		this.diff[1] = 0;

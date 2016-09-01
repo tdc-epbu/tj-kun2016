@@ -10,6 +10,7 @@ import jp.co.tdc.epbu.tjkun.measure.Button;
 import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 import jp.co.tdc.epbu.tjkun.measure.TouchStatus;
 import jp.co.tdc.epbu.tjkun.sample.RemoteTask;
+import jp.co.tdc.epbu.tjkun.section.Course;
 import jp.co.tdc.epbu.tjkun.strategy.CourceFactory;
 import jp.co.tdc.epbu.tjkun.strategy.CourceType;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategy;
@@ -30,6 +31,8 @@ public class start implements Runnable {
 	private ScheduledFuture<?> futureStart;
 	private DriveStrategy driveStrategy;
 
+	private Course cource;
+	
 	public static void main(String[] args) {
 
 		start starti = new start();
@@ -52,9 +55,14 @@ public class start implements Runnable {
 			Button button = new Button(ev3);
 			Calibrater calibrater = new Calibrater(ev3, button);
 			calibrater.calibration();
+			
+			ev3.resetGyro();
 
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
+			
+			cource = CourceFactory.create(CourceType.LEFT);
+			
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
 			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
@@ -108,7 +116,7 @@ public class start implements Runnable {
 
 	@Override
 	public void run() {
-		driveStrategy.operate(CourceFactory.create(CourceType.LEFT));
+		driveStrategy.operate(cource);
 	}
 
 }

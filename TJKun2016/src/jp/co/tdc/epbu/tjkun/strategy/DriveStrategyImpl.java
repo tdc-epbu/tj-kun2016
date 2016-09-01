@@ -33,10 +33,11 @@ public class DriveStrategyImpl implements DriveStrategy {
 		//Course cource = CourceFactory.create(CourceType.LEFT);
 		Travel travel = new TravelPidImpl(this.calibrater);
 		Travel jaggy = new TravelJaggyImpl(this.calibrater);
-
+		
 		Stopwatch sw = new Stopwatch();
 		sw.reset();
-		while (sw.elapsed() > 1000) {
+		while (sw.elapsed() > 500) {
+			Delay.msDelay(10);
 			EV3.getInstance().controlBalance(0, 0, 85);
 		}
 		

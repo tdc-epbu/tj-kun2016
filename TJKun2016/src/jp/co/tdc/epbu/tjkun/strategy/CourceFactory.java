@@ -46,7 +46,7 @@ public class CourceFactory {
 		//sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
 		
 		//ストレート
-		WheelSpeed speed2 = new WheelSpeed(90, 90);
+		WheelSpeed speed2 = new WheelSpeed(80, 80);
 		Condition condition2 = new Condition(ConditionType.DISTANCE, 13000);
 		sectionList.add(new Section(speed2, TravelType.PID, condition2, null));
 		//ストップ

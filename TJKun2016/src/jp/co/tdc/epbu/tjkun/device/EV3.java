@@ -168,7 +168,9 @@ public class EV3 implements Runnable, EV3Control {
 		Balancer.init(); // 倒立振子制御初期化
 	}
 
-
+	public void resetGyro() {
+		gyro.reset();
+	}
 
 	/**
 	 * センサー、モータの終了処理。
