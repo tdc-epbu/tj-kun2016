@@ -32,13 +32,9 @@ public class Course {
 	 */
 	public Section DecideSpeed(){
 
-		try {
 
-			sectionList.get(driveSection).judgeAbnormal();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
+		sectionList.get(driveSection).judgeAbnormal();
+		
 		if(sectionList.get(driveSection).judgeEndOfSection()){
 			updateSection();
 		}

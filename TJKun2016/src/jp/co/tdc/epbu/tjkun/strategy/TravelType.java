@@ -11,5 +11,6 @@ public enum TravelType {
 
 	PID,
 	JAGGY,
-	TAIL;
+	TAIL,
+	END;
 }

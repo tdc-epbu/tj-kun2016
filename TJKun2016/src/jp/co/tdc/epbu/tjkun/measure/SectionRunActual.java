@@ -32,7 +32,7 @@ public class SectionRunActual {
 				notify = true;
 			}
 			break;
-		case LINE_COLOR:
+		case GRAY_DETECTION:
 			// 未実装
 		}
 

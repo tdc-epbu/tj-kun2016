@@ -38,7 +38,7 @@ public class DriveStrategyImpl implements DriveStrategy {
 		sw.reset();
 		while (sw.elapsed() > 500) {
 			Delay.msDelay(10);
-			EV3.getInstance().controlBalance(0, 0, 85);
+			EV3.getInstance().controlBalance(0, 0, 88);
 		}
 		
 		
@@ -46,8 +46,20 @@ public class DriveStrategyImpl implements DriveStrategy {
 
 			Delay.msDelay(20);
 
-			Section section = cource.DecideSpeed();
+			Section section = new Section(null, null, null, null);
+			
+			try {
+				section = cource.DecideSpeed();
 
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+
+			if (section.getTravelType().equals(TravelType.END)) {
+				break;
+			}
+			
 			switch(section.getTravelType()){
 			case PID:
 				travel.travel(section.getWheelspeed());

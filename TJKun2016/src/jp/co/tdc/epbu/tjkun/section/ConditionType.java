@@ -9,8 +9,16 @@ package jp.co.tdc.epbu.tjkun.section;
  */
 public enum ConditionType {
 
+	// 検知
+	/** 黒色検知 */
+	BLACK_DETECTION,
+	/** 灰色検知 */
+	GRAY_DETECTION,
+	/** 回転数 */
 	DISTANCE,
+	/** 経過時間(ミリ秒) */
 	TIME,
-	LINE_COLOR;
+	/** ライン未検知からの経過時間(ミリ秒) */
+	WHITE_DURATION;
 	
 }
