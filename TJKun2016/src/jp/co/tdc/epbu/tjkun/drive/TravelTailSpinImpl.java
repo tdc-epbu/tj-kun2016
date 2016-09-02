@@ -2,13 +2,14 @@ package jp.co.tdc.epbu.tjkun.drive;
 
 import jp.co.tdc.epbu.tjkun.device.EV3;
 
-public class TravelTailSpinImpl implements Travel {
+public class TravelTailSpinImpl implements TravelTail {
 
 	EV3 ev3 = EV3.getInstance();
 	public void travel(WheelSpeed speed) {
-		float forward = speed.getWheelSpeedScaleLeft();
-		float turn = 50.0F;
-		int tail = 110;
-		ev3.controlBalance(forward, turn ,tail);
+		int left = speed.getWheelSpeedScaleLeft();
+		int right = speed.getWheelSpeedScaleRight();
+		int tail = 92;
+		ev3.controlDirect(left, right, tail) ;
+
 	}
 }

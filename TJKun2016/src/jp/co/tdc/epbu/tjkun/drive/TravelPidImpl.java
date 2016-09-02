@@ -45,6 +45,9 @@ public class TravelPidImpl implements Travel {
 		ev3.controlBalance(forward, turn ,tail);
 	}
 
+	public void calculateSpin() {
+
+	}
 
 	public float getBrightnessValue() {
 

@@ -3,7 +3,7 @@ package jp.co.tdc.epbu.tjkun.drive;
 import jp.co.tdc.epbu.tjkun.device.EV3;
 import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 
-public class TravelJaggyImpl implements Travel {
+public class TravelJaggyImpl implements TravelDirect,TravelLineTrace,TravelTail {
 
 	EV3 ev3 = EV3.getInstance();
 	private static final float LIGHT_WHITE = 0.50F; // 白色のカラーセンサー輝度値
@@ -35,6 +35,10 @@ public class TravelJaggyImpl implements Travel {
 		} else {
 			return -50.0F; // 左旋回命令
 		}
+	}
+
+	public void calculateSpin() {
+
 	}
 
 }
