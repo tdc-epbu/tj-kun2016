@@ -21,46 +21,39 @@ public class DriveStrategyImpl implements DriveStrategy {
 
 	private Calibrater calibrater;
 
+	private int i;
+
 	public DriveStrategyImpl(Calibrater calibrater) {
 
 		this.calibrater = calibrater;
+		i = 0;
 	}
-
 
 	@Override
 	public void operate(Course cource) {
 
-		//Course cource = CourceFactory.create(CourceType.LEFT);
+		// Course cource = CourceFactory.create(CourceType.LEFT);
 		Travel travel = new TravelPidImpl(this.calibrater);
 		Travel jaggy = new TravelJaggyImpl(this.calibrater);
-		
+
 		Stopwatch sw = new Stopwatch();
 		sw.reset();
 		while (sw.elapsed() > 500) {
+			EV3.getInstance().controlBalance(0, 0, 95);
 			Delay.msDelay(10);
-			EV3.getInstance().controlBalance(0, 0, 88);
 		}
-		
-		
-		while(cource.isDriving()){
+
+		while (true) {
 
 			Delay.msDelay(20);
 
-			Section section = new Section(null, null, null, null);
-			
-			try {
-				section = cource.DecideSpeed();
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
+			Section section = cource.DecideSpeed();
 
 			if (section.getTravelType().equals(TravelType.END)) {
 				break;
 			}
-			
-			switch(section.getTravelType()){
+
+			switch (section.getTravelType()) {
 			case PID:
 				travel.travel(section.getWheelspeed());
 				break;

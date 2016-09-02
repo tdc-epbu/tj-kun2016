@@ -60,9 +60,9 @@ public class Course {
 	private void updateSection(){
 
 		driveSection++;
-		if(sectionList.size() > driveSection){
-			return;
-		}
+//		if(sectionList.size() > driveSection){
+//			return;
+//		}
 		Sound.beep();
 		sectionList.get(driveSection).startMeasure();
 	}

@@ -38,37 +38,41 @@ public class CourceFactory {
 //		Condition condition0 = new Condition(ConditionType.TIME, 200);
 //		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
 		//スタート
-		WheelSpeed speed1 = new WheelSpeed(10, 10);
-		Condition condition1 = new Condition(ConditionType.TIME, 1000);
+		WheelSpeed speed1 = new WheelSpeed(60, 60);
+		Condition condition1 = new Condition(ConditionType.TIME, 2000);
 		sectionList.add(new Section(speed1, TravelType.JAGGY, condition1, null));
 		//WheelSpeed speed4 = new WheelSpeed(50, 50);
 		//Condition condition4 = new Condition(ConditionType.DISTANCE, 360);
 		//sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
 		
 		//ストレート
-		WheelSpeed speed2 = new WheelSpeed(100, 100);
-		Condition condition2 = new Condition(ConditionType.DISTANCE, 3000);
+		WheelSpeed speed2 = new WheelSpeed(90, 90);
+		Condition condition2 = new Condition(ConditionType.DISTANCE, 3300);
 		sectionList.add(new Section(speed2, TravelType.PID, condition2, null));
 		//ストレート
-		WheelSpeed speed3 = new WheelSpeed(80, 80);
-		Condition condition3 = new Condition(ConditionType.DISTANCE, 1500);
+		WheelSpeed speed3 = new WheelSpeed(75, 75);
+		Condition condition3 = new Condition(ConditionType.DISTANCE, 700);
 		sectionList.add(new Section(speed3, TravelType.PID, condition3, null));
 		//ストレート
-		WheelSpeed speed4 = new WheelSpeed(100, 100);
-		Condition condition4 = new Condition(ConditionType.DISTANCE, 1500);
+		WheelSpeed speed4 = new WheelSpeed(90, 90);
+		Condition condition4 = new Condition(ConditionType.DISTANCE, 1800);
 		sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
 		//ストレート
-		WheelSpeed speed5 = new WheelSpeed(80, 80);
-		Condition condition5 = new Condition(ConditionType.DISTANCE, 1000);
+		WheelSpeed speed5 = new WheelSpeed(75, 75);
+		Condition condition5 = new Condition(ConditionType.DISTANCE, 500);
 		sectionList.add(new Section(speed5, TravelType.PID, condition5, null));
 		//ストレート
-		WheelSpeed speed6 = new WheelSpeed(100, 100);
-		Condition condition6 = new Condition(ConditionType.DISTANCE, 1500);
+		WheelSpeed speed6 = new WheelSpeed(90, 90);
+		Condition condition6 = new Condition(ConditionType.DISTANCE, 2000);
 		sectionList.add(new Section(speed6, TravelType.PID, condition6, null));
 		//ストレート
-		WheelSpeed speed7 = new WheelSpeed(80, 80);
-		Condition condition7 = new Condition(ConditionType.DISTANCE, 2000);
+		WheelSpeed speed7 = new WheelSpeed(75, 75);
+		Condition condition7 = new Condition(ConditionType.DISTANCE, 500);
 		sectionList.add(new Section(speed7, TravelType.PID, condition7, null));
+		//ストレート
+		WheelSpeed speed7_2 = new WheelSpeed(85, 85);
+		Condition condition7_2 = new Condition(ConditionType.DISTANCE, 2700);
+		sectionList.add(new Section(speed7_2, TravelType.PID, condition7_2, null));
 		//ストップ
 		WheelSpeed speed8 = new WheelSpeed(0, 0);
 		Condition condition8 = new Condition(ConditionType.DISTANCE, 6000);
@@ -82,8 +86,71 @@ public class CourceFactory {
 	}
 
 	private static Course createRightCource() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+
+		List<Section> sectionList = new ArrayList<>();
+
+//		WheelSpeed speed0 = new WheelSpeed(-60, -60);
+//		Condition condition0 = new Condition(ConditionType.TIME, 200);
+//		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
+		//スタート
+		WheelSpeed speed1 = new WheelSpeed(60, 60);
+		Condition condition1 = new Condition(ConditionType.TIME, 2000);
+		sectionList.add(new Section(speed1, TravelType.JAGGY, condition1, null));
+		//WheelSpeed speed4 = new WheelSpeed(50, 50);
+		//Condition condition4 = new Condition(ConditionType.DISTANCE, 360);
+		//sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
+		
+		//ストレート
+		WheelSpeed speed2 = new WheelSpeed(90, 90);
+		Condition condition2 = new Condition(ConditionType.DISTANCE, 3300);
+		sectionList.add(new Section(speed2, TravelType.PID, condition2, null));
+		//ストレート
+		WheelSpeed speed3 = new WheelSpeed(75, 75);
+		Condition condition3 = new Condition(ConditionType.DISTANCE, 1000);
+		sectionList.add(new Section(speed3, TravelType.PID, condition3, null));
+		//ストレート
+		WheelSpeed speed4 = new WheelSpeed(90, 90);
+		Condition condition4 = new Condition(ConditionType.DISTANCE, 2100);
+		sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
+		//ストレート
+		WheelSpeed speed5 = new WheelSpeed(40, 40);
+		Condition condition5 = new Condition(ConditionType.DISTANCE, 450);
+		sectionList.add(new Section(speed5, TravelType.PID, condition5, null));
+		//ストレート
+		WheelSpeed speed5_2 = new WheelSpeed(80, 80);
+		Condition condition5_2 = new Condition(ConditionType.DISTANCE, 500);
+		sectionList.add(new Section(speed5_2, TravelType.PID, condition5_2, null));
+		//ストレート
+		WheelSpeed speed5_3 = new WheelSpeed(40, 40);
+		Condition condition5_3 = new Condition(ConditionType.DISTANCE, 450);
+		sectionList.add(new Section(speed5_3, TravelType.PID, condition5_3, null));
+		//ストレート
+		WheelSpeed speed6 = new WheelSpeed(90, 90);
+		Condition condition6 = new Condition(ConditionType.DISTANCE, 1950);
+		sectionList.add(new Section(speed6, TravelType.PID, condition6, null));
+		//ストレート
+		WheelSpeed speed7 = new WheelSpeed(75, 75);
+		Condition condition7 = new Condition(ConditionType.DISTANCE, 500);
+		sectionList.add(new Section(speed7, TravelType.PID, condition7, null));
+		//ストレート
+		WheelSpeed speed8 = new WheelSpeed(100, 100);
+		Condition condition8 = new Condition(ConditionType.DISTANCE, 1800);
+		sectionList.add(new Section(speed8, TravelType.PID, condition8, null));
+		//ストレート
+		WheelSpeed speed9 = new WheelSpeed(65, 65);
+		Condition condition9 = new Condition(ConditionType.DISTANCE, 1000);
+		sectionList.add(new Section(speed9, TravelType.PID, condition9, null));
+		//ストップ
+		WheelSpeed speed10 = new WheelSpeed(0, 0);
+		Condition condition10 = new Condition(ConditionType.DISTANCE, 5000);
+		sectionList.add(new Section(speed10, TravelType.PID, condition10, null));
+		//ストップ
+		WheelSpeed speed11 = new WheelSpeed(0, 0);
+		Condition condition11 = new Condition(ConditionType.TIME, 5000);
+		sectionList.add(new Section(speed11, TravelType.END, condition11, null));
+
+		return new Course(sectionList);
 	}
+	
 
 }

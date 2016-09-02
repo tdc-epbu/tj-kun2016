@@ -66,12 +66,12 @@ public class start implements Runnable {
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
 			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
-			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 100, TimeUnit.MILLISECONDS);
+			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 200, TimeUnit.MILLISECONDS);
 
 			// 尻尾を停止位置へ固定しスタート準備
 			while (button.touchStatus() != TouchStatus.Released
 					&& !RemoteTask.getInstance().checkRemoteCommand(RemoteTask.REMOTE_COMMAND_START)) {
-				ev3.controlDirect(0, 0, 92);
+				ev3.controlDirect(0, 0, 91);
 				Delay.msDelay(10);
 			}
 
@@ -85,7 +85,7 @@ public class start implements Runnable {
 
 			while (button.touchStatus() != TouchStatus.Released
 					&& !RemoteTask.getInstance().checkRemoteCommand(RemoteTask.REMOTE_COMMAND_STOP)) {
-				Delay.msDelay(100);
+				Delay.msDelay(200);
 			}
 
 			// pidDriver.drive(80, 13600, 13600);
