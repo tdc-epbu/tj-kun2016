@@ -2,7 +2,7 @@ package jp.co.tdc.epbu.tjkun.drive;
 
 import jp.co.tdc.epbu.tjkun.device.EV3;
 
-public class TravelTailDownImpl implements Travel {
+public class TravelTailUpImpl implements Travel {
 	EV3 ev3 = EV3.getInstance();
 	final public static int motor_adjust_left = 50;
 	final public static int motor_adjust_right = 50;
@@ -12,10 +12,10 @@ public class TravelTailDownImpl implements Travel {
 		int right = 0;
 		int tail_up = 90;
 		int tail_down = 60;
-		ev3.controlBalance(20, 0, 0);
-		for (int i = tail_up; i <= tail_down; i--) {
-			ev3.controlDirect(left, right, tail_down) ;
+		for (int i = tail_down; i >= tail_up; i++) {
+			ev3.controlDirect(left, right, tail_up) ;
 		}
+		ev3.controlBalance(-10, 0, 0);
 	}
 
 
