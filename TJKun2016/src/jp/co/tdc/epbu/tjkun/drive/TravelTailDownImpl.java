@@ -8,11 +8,13 @@ public class TravelTailDownImpl implements Travel {
 	final public static int motor_adjust_right = 50;
 
 	public void travel(WheelSpeed speed) {
-		float forward = speed.getWheelSpeedScaleLeft();
-		float turn = 0.0F;
-		int tail = 110;
-		ev3.controlBalance(forward, turn ,tail);
-
+		int left = 0;
+		int right = 0;
+		int tail_up = 90;
+		int tail_down = 60;
+		for (int i = tail_up; i <= tail_down; i--) {
+			ev3.controlDirect(left, right, tail_down) ;
+		}
 	}
 
 
