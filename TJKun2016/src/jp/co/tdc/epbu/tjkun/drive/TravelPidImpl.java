@@ -15,7 +15,7 @@ public class TravelPidImpl implements Travel {
 	float diff[] = new float[2]; // 差分
 	float integral; // 積分
 	private Stopwatch stopwatch;
-	int maxPid = 50;
+	int maxPid = 100;
 
 
 	private Calibrater calibrater;
@@ -25,7 +25,7 @@ public class TravelPidImpl implements Travel {
 
 		this.calibrater = calibrater;
 
-		this.targetLight = 50;
+		this.targetLight = 60;
 		this.integral = 0;
 		this.diff[0] = 0;
 		this.diff[1] = 0;

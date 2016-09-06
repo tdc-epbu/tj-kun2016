@@ -170,6 +170,9 @@ public class EV3 implements Runnable, EV3Control {
 
 	public void resetGyro() {
 		gyro.reset();
+		motorPortL.resetTachoCount(); // 左モータエンコーダリセット
+		motorPortR.resetTachoCount(); // 右モータエンコーダリセット
+		Balancer.init();
 	}
 
 	/**

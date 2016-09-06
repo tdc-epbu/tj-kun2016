@@ -16,6 +16,7 @@ import jp.co.tdc.epbu.tjkun.strategy.CourceType;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategy;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategyImpl;
 import lejos.utility.Delay;
+import lejos.utility.Stopwatch;
 
 /**
  * キャリブレーションを実行し走行戦略の判定処理を呼び出す
@@ -56,17 +57,19 @@ public class start implements Runnable {
 			Calibrater calibrater = new Calibrater(ev3, button);
 			calibrater.calibration();
 			
-			ev3.resetGyro();
+
 
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
 			
-			cource = CourceFactory.create(CourceType.LEFT);
+			cource = CourceFactory.create(CourceType.RIGHT);
 			
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
+			ev3.reset();;
+			
 			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
-			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 200, TimeUnit.MILLISECONDS);
+			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 500, TimeUnit.MILLISECONDS);
 
 			// 尻尾を停止位置へ固定しスタート準備
 			while (button.touchStatus() != TouchStatus.Released
@@ -81,6 +84,15 @@ public class start implements Runnable {
 			// Delay.msDelay(4);
 			// }
 
+			Stopwatch sw = new Stopwatch();
+	
+			sw.reset();
+			while (sw.elapsed() > 500) {
+				EV3.getInstance().controlBalance(0, 0, 95);
+				Delay.msDelay(10);
+			}
+			
+			
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);
 
 			while (button.touchStatus() != TouchStatus.Released
