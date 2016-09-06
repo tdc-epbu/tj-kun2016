@@ -15,7 +15,7 @@ public class TravelPidImpl implements Travel {
 	float diff[] = new float[2]; // 差分
 	float integral; // 積分
 	private Stopwatch stopwatch;
-	int maxPid = 100;
+	int maxPid = 60;
 
 
 	private Calibrater calibrater;

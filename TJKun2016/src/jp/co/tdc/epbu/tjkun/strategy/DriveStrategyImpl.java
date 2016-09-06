@@ -39,8 +39,6 @@ public class DriveStrategyImpl implements DriveStrategy {
 
 		while (true) {
 
-			Delay.msDelay(20);
-
 			Section section = cource.DecideSpeed();
 
 			if (section.getTravelType().equals(TravelType.END)) {
@@ -57,6 +55,8 @@ public class DriveStrategyImpl implements DriveStrategy {
 			default:
 				break;
 			}
+
+			Delay.msDelay(15);
 
 		}
 	}

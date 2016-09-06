@@ -5,8 +5,6 @@ package jp.co.tdc.epbu.tjkun.section;
 
 import java.util.List;
 
-import lejos.hardware.Sound;
-
 /**
  * @author Takayuki
  *
@@ -63,7 +61,7 @@ public class Course {
 //		if(sectionList.size() > driveSection){
 //			return;
 //		}
-		Sound.beep();
+		//Sound.beep();
 		sectionList.get(driveSection).startMeasure();
 	}
 }

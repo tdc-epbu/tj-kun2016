@@ -49,9 +49,11 @@ public class start implements Runnable {
 		try {
 
 			scheduler = Executors.newScheduledThreadPool(3);
-
 			
 
+			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
+			ev3.controlDirect(0, 0, 0);
+			
 			// キャリブレーション実行
 			Button button = new Button(ev3);
 			Calibrater calibrater = new Calibrater(ev3, button);
@@ -68,7 +70,7 @@ public class start implements Runnable {
 
 			ev3.reset();;
 			
-			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
+
 			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 500, TimeUnit.MILLISECONDS);
 
 			// 尻尾を停止位置へ固定しスタート準備
@@ -88,10 +90,9 @@ public class start implements Runnable {
 	
 			sw.reset();
 			while (sw.elapsed() > 500) {
-				EV3.getInstance().controlBalance(0, 0, 95);
 				Delay.msDelay(10);
+				EV3.getInstance().controlBalance(0, 0, 102);
 			}
-			
 			
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);
 
@@ -130,5 +131,5 @@ public class start implements Runnable {
 	public void run() {
 		driveStrategy.operate(cource);
 	}
-
+	
 }
