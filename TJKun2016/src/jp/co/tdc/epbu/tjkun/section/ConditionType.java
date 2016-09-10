@@ -24,6 +24,8 @@ public enum ConditionType {
 	DISTANCE,
 	/** 経過時間(ミリ秒) */
 	TIME,
+	/** しっぽ角度*/
+	TAIL_ANGLE,
 	/** ライン未検知からの経過時間(ミリ秒) */
 	WHITE_DURATION;
 	

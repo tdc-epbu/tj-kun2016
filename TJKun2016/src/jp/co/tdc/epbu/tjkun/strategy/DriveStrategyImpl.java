@@ -3,7 +3,6 @@
  */
 package jp.co.tdc.epbu.tjkun.strategy;
 
-import jp.co.tdc.epbu.tjkun.device.EV3;
 import jp.co.tdc.epbu.tjkun.drive.Travel;
 import jp.co.tdc.epbu.tjkun.drive.TravelJaggyImpl;
 import jp.co.tdc.epbu.tjkun.drive.TravelPidImpl;
@@ -12,6 +11,7 @@ import jp.co.tdc.epbu.tjkun.drive.TravelTailImpl;
 import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 import jp.co.tdc.epbu.tjkun.section.Course;
 import jp.co.tdc.epbu.tjkun.section.Section;
+import lejos.utility.Delay;
 
 /**
  * @author Takayuki
@@ -62,8 +62,8 @@ public class DriveStrategyImpl implements DriveStrategy {
 			default:
 			}
 
-			EV3.getInstance().run();
-			//Delay.msDelay(15);
+			//EV3.getInstance().run();
+			Delay.msDelay(14);
 
 		}
 	}

@@ -38,6 +38,11 @@ public class SectionRunActual {
 				return true;
 			}
 			break;
+		case TAIL_ANGLE:
+			if (condition.getConditionValue() >= ev3Control.getTailAngle()) {
+				return true;
+			}
+			break;
 		}
 
 		return notify;

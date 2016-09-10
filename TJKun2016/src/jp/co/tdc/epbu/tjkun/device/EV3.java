@@ -315,4 +315,10 @@ public class EV3 implements Runnable, EV3Control {
 
 		return motorPortR.getTachoCount();
 	}
+
+	@Override
+	public int getTailAngle() {
+		
+		return motorPortT.getTachoCount();
+	}
 }

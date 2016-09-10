@@ -15,6 +15,7 @@ import jp.co.tdc.epbu.tjkun.strategy.CourceFactory;
 import jp.co.tdc.epbu.tjkun.strategy.CourceType;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategy;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategyImpl;
+import lejos.hardware.Sound;
 import lejos.utility.Delay;
 import lejos.utility.Stopwatch;
 
@@ -64,11 +65,12 @@ public class start implements Runnable {
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
 			
-			cource = CourceFactory.create(CourceType.GATE);
+			cource = CourceFactory.create(CourceType.RIGHT);
 			
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
-			ev3.reset();;
+			ev3.reset();
+			Sound.beep();
 			
 
 			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 500, TimeUnit.MILLISECONDS);
@@ -89,9 +91,9 @@ public class start implements Runnable {
 			Stopwatch sw = new Stopwatch();
 	
 			sw.reset();
-			while (sw.elapsed() > 500) {
+			while (sw.elapsed() > 1000) {
 				Delay.msDelay(10);
-				EV3.getInstance().controlBalance(0, 0, 100);
+				EV3.getInstance().controlBalance(0, 0, 104);
 			}
 			
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);

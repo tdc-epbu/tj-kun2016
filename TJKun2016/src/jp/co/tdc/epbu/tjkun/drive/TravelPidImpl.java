@@ -20,6 +20,7 @@ public class TravelPidImpl implements Travel {
 
 	private Calibrater calibrater;
 
+	private float passLight = 0;
 
 	public TravelPidImpl(Calibrater calibrater) {
 
@@ -66,6 +67,10 @@ public class TravelPidImpl implements Travel {
 	private float CalcTurnValue(float nowLight) {
 
 		LCD.drawString(Float.toString(nowLight), 0, 2);
+
+		nowLight = 0.95f * nowLight + 0.05f * passLight; 
+		passLight = nowLight;
+		
 		float tm = stopwatch.elapsed() / 250.0f;
 
 		float P, I, D; // P,I,Dの値
