@@ -32,8 +32,12 @@ public class SectionRunActual {
 				notify = true;
 			}
 			break;
-		case GRAY_DETECTION:
+		case OBSTACLES_DETECTION:
 			// 未実装
+			if (ev3Control.getSonarDistance() < 0.3) { // 閾値は仮設定
+				return true;
+			}
+			break;
 		}
 
 		return notify;
