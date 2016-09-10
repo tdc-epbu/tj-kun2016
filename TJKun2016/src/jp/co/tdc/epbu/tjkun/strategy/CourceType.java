@@ -10,6 +10,10 @@ package jp.co.tdc.epbu.tjkun.strategy;
 public enum CourceType {
 
 	LEFT,
-	RIGHT;
+	RIGHT,
+	STAIRS,
+	GATE,
+	LEFT_GARAGE,
+	RIGHT_GARAGE;
 
 }

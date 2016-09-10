@@ -14,7 +14,12 @@ public enum ConditionType {
 	BLACK_DETECTION,
 	/** 灰色検知 */
 	GRAY_DETECTION,
-	VIBRATION,
+	/** 障害物検知 */
+	OBSTACLES_DETECTION,
+	/** 衝突検知 */
+	CONFLICT_DETECTION,
+	
+	// 実績
 	/** 回転数 */
 	DISTANCE,
 	/** 経過時間(ミリ秒) */

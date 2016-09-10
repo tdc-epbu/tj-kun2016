@@ -20,30 +20,50 @@ public class CourceFactory {
 
 	public static Course create(CourceType courceType){
 
+		List<Section> sectionList;
+		
 		switch (courceType) {
 		case LEFT:
-			return createLeftCource();
+			sectionList = createLeftCource();
+			break;
 		case RIGHT:
-			return createRightCource();
+			sectionList = createRightCource();
+			break;
+		case GATE:
+			sectionList = createGateCource();
+			break;
+		case STAIRS:
+			sectionList = createStairsCource();
+			break;
 		default:
-			return createLeftCource();
+			sectionList = createLeftCource();
 		}
+		
+		return new Course(sectionList);
 	}
 
-	private static Course createLeftCource() {
+	private static List<Section> createGateCource() {
 
 		List<Section> sectionList = new ArrayList<>();
 
-//		WheelSpeed speed0 = new WheelSpeed(-60, -60);
-//		Condition condition0 = new Condition(ConditionType.TIME, 200);
-//		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
+		return sectionList;
+	}
+
+	private static List<Section> createStairsCource() {
+
+		List<Section> sectionList = new ArrayList<>();
+
+		return sectionList;
+	}
+
+	private static List<Section> createLeftCource() {
+
+		List<Section> sectionList = new ArrayList<>();
+
 		//スタート
 		WheelSpeed speed1 = new WheelSpeed(60, 60);
-		Condition condition1 = new Condition(ConditionType.TIME, 2000);
+		Condition condition1 = new Condition(ConditionType.DISTANCE, 400);
 		sectionList.add(new Section(speed1, TravelType.JAGGY, condition1, null));
-		//WheelSpeed speed4 = new WheelSpeed(50, 50);
-		//Condition condition4 = new Condition(ConditionType.DISTANCE, 360);
-		//sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
 		
 		//ストレート
 		WheelSpeed speed2 = new WheelSpeed(90, 90);
@@ -82,23 +102,19 @@ public class CourceFactory {
 		Condition condition9 = new Condition(ConditionType.TIME, 5000);
 		sectionList.add(new Section(speed9, TravelType.END, condition9, null));
 
-		return new Course(sectionList);
+		sectionList.addAll(createGateCource());
+		
+		return sectionList;
 	}
 
-	private static Course createRightCource() {
+	private static List<Section> createRightCource() {
 
 		List<Section> sectionList = new ArrayList<>();
 
-//		WheelSpeed speed0 = new WheelSpeed(-60, -60);
-//		Condition condition0 = new Condition(ConditionType.TIME, 200);
-//		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
 		//スタート
 		WheelSpeed speed1 = new WheelSpeed(60, 60);
-		Condition condition1 = new Condition(ConditionType.TIME, 2000);
+		Condition condition1 = new Condition(ConditionType.DISTANCE, 400);
 		sectionList.add(new Section(speed1, TravelType.JAGGY, condition1, null));
-		//WheelSpeed speed4 = new WheelSpeed(50, 50);
-		//Condition condition4 = new Condition(ConditionType.DISTANCE, 360);
-		//sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
 		
 		//ストレート
 		WheelSpeed speed2 = new WheelSpeed(90, 90);
@@ -149,7 +165,9 @@ public class CourceFactory {
 		Condition condition11 = new Condition(ConditionType.TIME, 5000);
 		sectionList.add(new Section(speed11, TravelType.END, condition11, null));
 
-		return new Course(sectionList);
+		sectionList.addAll(createStairsCource());
+
+		return sectionList;
 	}
 	
 

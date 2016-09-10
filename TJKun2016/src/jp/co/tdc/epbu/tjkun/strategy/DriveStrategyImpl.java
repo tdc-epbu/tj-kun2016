@@ -32,11 +32,6 @@ public class DriveStrategyImpl implements DriveStrategy {
 	@Override
 	public void operate(Course cource) {
 
-		// Course cource = CourceFactory.create(CourceType.LEFT);
-
-
-
-
 		while (true) {
 
 			Section section = cource.DecideSpeed();
