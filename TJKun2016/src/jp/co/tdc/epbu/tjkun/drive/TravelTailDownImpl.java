@@ -10,10 +10,11 @@ public class TravelTailDownImpl implements Travel {
 	}
 
 	public void travel(WheelSpeed speed) {
-		int tail_up = 80;
+		int tail_up = 65;
 		int tail_down = 90;
 		ev3.controlBalance(0, 0, tail_down);
-		ev3.controlDirect(10, 10, tail_down) ;
+//		Delay.msDelay(10);
+//		ev3.controlDirect(10, 10, tail_down) ;
 		for (int i = tail_down; i <= tail_up; i--) {
 			ev3.controlDirect(0, 0, i) ;
 		}

@@ -64,7 +64,7 @@ public class start implements Runnable {
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
 			
-			cource = CourceFactory.create(CourceType.LEFT);
+			cource = CourceFactory.create(CourceType.GATE);
 			
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
@@ -98,7 +98,7 @@ public class start implements Runnable {
 
 			while (button.touchStatus() != TouchStatus.Released
 					&& !RemoteTask.getInstance().checkRemoteCommand(RemoteTask.REMOTE_COMMAND_STOP)) {
-				Delay.msDelay(200);
+				Delay.msDelay(250);
 			}
 
 			// pidDriver.drive(80, 13600, 13600);
