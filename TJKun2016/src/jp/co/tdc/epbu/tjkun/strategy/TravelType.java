@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package jp.co.tdc.epbu.tjkun.strategy;
 
@@ -12,5 +12,6 @@ public enum TravelType {
 	PID,
 	JAGGY,
 	TAIL,
+	TAILDOWN,
 	END;
 }
