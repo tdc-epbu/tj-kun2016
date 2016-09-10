@@ -64,7 +64,7 @@ public class start implements Runnable {
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
 			
-			cource = CourceFactory.create(CourceType.RIGHT);
+			cource = CourceFactory.create(CourceType.LEFT);
 			
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
@@ -91,7 +91,7 @@ public class start implements Runnable {
 			sw.reset();
 			while (sw.elapsed() > 500) {
 				Delay.msDelay(10);
-				EV3.getInstance().controlBalance(0, 0, 102);
+				EV3.getInstance().controlBalance(0, 0, 100);
 			}
 			
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);

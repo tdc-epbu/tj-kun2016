@@ -60,7 +60,6 @@ public class DriveStrategyImpl implements DriveStrategy {
 				taildown.travel(section.getWheelspeed());
 				break;
 			default:
-				break;
 			}
 
 			Delay.msDelay(15);

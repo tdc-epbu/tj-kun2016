@@ -5,6 +5,8 @@ package jp.co.tdc.epbu.tjkun.section;
 
 import java.util.List;
 
+import lejos.hardware.Sound;
+
 /**
  * @author Takayuki
  *
@@ -31,7 +33,9 @@ public class Course {
 	public Section DecideSpeed(){
 
 
-		sectionList.get(driveSection).judgeAbnormal();
+//		if(sectionList.get(driveSection).judgeAbnormal()){
+//			updateSection();
+//		}
 		
 		if(sectionList.get(driveSection).judgeEndOfSection()){
 			updateSection();
@@ -58,10 +62,8 @@ public class Course {
 	private void updateSection(){
 
 		driveSection++;
-//		if(sectionList.size() > driveSection){
-//			return;
-//		}
-		//Sound.beep();
+
+		Sound.beep();
 		sectionList.get(driveSection).startMeasure();
 	}
 }

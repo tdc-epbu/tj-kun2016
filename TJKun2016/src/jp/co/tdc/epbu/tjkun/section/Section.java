@@ -36,8 +36,8 @@ public class Section {
 	/**
 	 * 異常値を判定する
 	 */
-	public void judgeAbnormal(){
-		// TODO
+	public boolean judgeAbnormal(){
+		return sectionRunActual.notify(abnormalCondition);
 	}
 
 	/**
