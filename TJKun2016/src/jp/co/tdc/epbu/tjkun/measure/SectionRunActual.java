@@ -7,12 +7,14 @@ import lejos.utility.Stopwatch;
 public class SectionRunActual {
 
 	private EV3Control ev3Control;
+	private Calibrater calibrater;
 
 	Stopwatch time = new Stopwatch();
 	int initMotorCount;
 
-	public SectionRunActual(EV3Control ev3Control) {
+	public SectionRunActual(EV3Control ev3Control, Calibrater calibrater) {
 		this.ev3Control = ev3Control;
+		this.calibrater = calibrater;
 	}
 
 	public boolean notify(Condition condition){
@@ -33,8 +35,13 @@ public class SectionRunActual {
 			}
 			break;
 		case GRAY_DETECTION:
-			// 未実装
-		}
+			if (condition.getConditionValue() <= calibrater.grayBaseline()) {
+				Thread.sleep(1000);
+				if(condition.getConditionValue() <= calibrater.grayBaseline()){
+				notify = true;
+				}
+			}
+			}
 
 		return notify;
 	}

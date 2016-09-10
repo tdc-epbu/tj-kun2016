@@ -18,6 +18,7 @@ public class Calibrater {
 
 	private float blackBaseline;
 	private float whiteBaseline;
+	private float grayBaseline;
 
 	public Calibrater(EV3Control ev3Control, Button button) {
 
@@ -31,15 +32,20 @@ public class Calibrater {
 
 		blackBaseline = getBrightnessForTouchWait();
 		LCD.drawString("Black:" + blackBaseline, 0, 5);
-		
-		
+
+
 		LCD.drawString("Get White...  ", 0, 4);
-		
+
 
 		whiteBaseline = getBrightnessForTouchWait();
 		LCD.drawString("White:" + whiteBaseline, 0, 6);
-		
-		
+
+		LCD.drawString("Get Gray...  ", 0, 4);
+
+		grayBaseline  = getBrightnessForTouchWait();
+		LCD.drawString("Gray:" + grayBaseline, 0, 5);
+
+
 	}
 
 	private float getBrightnessForTouchWait() {
@@ -58,5 +64,9 @@ public class Calibrater {
 
 	public float whiteBaseline() {
 		return whiteBaseline;
+	}
+
+	public float grayBaseline() {
+		return grayBaseline;
 	}
 }
