@@ -1,26 +1,21 @@
 package jp.co.tdc.epbu.tjkun.measure;
 
-// import jp.co.tdc.epbu.tjkun.device.;
 import jp.co.tdc.epbu.tjkun.device.EV3Control;
-public class LineDetection {
+
+public class LineDetection implements Detection{
 
 	private EV3Control ev3Control;
-	/**
-	 * 通知をする条件は検討中。現段階では未実装
-	 */
-
-	if (ev3Control.touchSensorIsPressed() = ev3Control.getBrightness()) {
-		pressStatus = true; // タッチセンサーが押された
-		return TouchStatus.Pressed;
-	} else {
-		if (pressStatus) {
-			pressStatus = false; // タッチセンサーが押された後に放した
-			return TouchStatus.Released;
-		}
+	public LineDetection(EV3Control ev3Control) {
+		this.ev3Control = ev3Control;
 	}
 
-
-
+	@Override
+	public boolean Notify() {
+		if (ev3Control.getBrightness() < 0.1) { // 閾値は仮設定
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
-}
