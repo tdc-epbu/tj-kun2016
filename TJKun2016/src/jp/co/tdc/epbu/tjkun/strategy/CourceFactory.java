@@ -130,17 +130,17 @@ public class CourceFactory {
 		Condition condition0 = new Condition(ConditionType.TIME, 2000);
 		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
 		//スタート
-		WheelSpeed speed1 = new WheelSpeed(40, 40);
+		WheelSpeed speed1 = new WheelSpeed(50, 50);
 		Condition condition1 = new Condition(ConditionType.DISTANCE, 200);
 		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
-		//スタート
-		WheelSpeed speed1_2 = new WheelSpeed(65, 65);
-		Condition condition1_2 = new Condition(ConditionType.DISTANCE, 200);
-		sectionList.add(new Section(speed1_2, TravelType.PID, condition1_2, null));
+//		//スタート
+//		WheelSpeed speed1_2 = new WheelSpeed(65, 65);
+//		Condition condition1_2 = new Condition(ConditionType.DISTANCE, 200);
+//		sectionList.add(new Section(speed1_2, TravelType.PID, condition1_2, null));
 
 		//ストレート
 		WheelSpeed speed2 = new WheelSpeed(90, 90);
-		Condition condition2 = new Condition(ConditionType.DISTANCE, 2850);
+		Condition condition2 = new Condition(ConditionType.DISTANCE, 3200);
 		sectionList.add(new Section(speed2, TravelType.PID, condition2, null));
 		//ストレート
 		WheelSpeed speed3 = new WheelSpeed(70, 70);
@@ -190,7 +190,7 @@ public class CourceFactory {
 		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
 		//スタート
 		WheelSpeed speed1 = new WheelSpeed(50, 50);
-		Condition condition1 = new Condition(ConditionType.TIME, 2500);
+		Condition condition1 = new Condition(ConditionType.DISTANCE, 200);
 		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
 
 		//ストレート

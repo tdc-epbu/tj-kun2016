@@ -33,19 +33,24 @@ public class DriveStrategyImpl implements DriveStrategy {
 		jaggy = new TravelJaggyImpl(this.calibrater);
 		tail = new TravelTailImpl(this.calibrater);
 		taildown = new TravelTailDownImpl(this.calibrater);
+
+		//sw = new Stopwatch();
 	}
 
 	@Override
 	public void operate(Course cource) {
-
+		
 		while (true) {
 
 			Section section = cource.DecideSpeed();
 
+
 			if (section.getTravelType().equals(TravelType.END)) {
 				break;
 			}
-
+			Delay.msDelay(6);
+			
+			
 			switch (section.getTravelType()) {
 			case PID:
 				travel.travel(section.getWheelspeed());
@@ -61,9 +66,9 @@ public class DriveStrategyImpl implements DriveStrategy {
 				break;
 			default:
 			}
+			Delay.msDelay(8);
 
 			//EV3.getInstance().run();
-			Delay.msDelay(14);
 
 		}
 	}

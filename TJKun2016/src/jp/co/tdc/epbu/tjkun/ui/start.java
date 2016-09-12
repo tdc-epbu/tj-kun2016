@@ -17,7 +17,6 @@ import jp.co.tdc.epbu.tjkun.strategy.DriveStrategy;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategyImpl;
 import lejos.hardware.Sound;
 import lejos.utility.Delay;
-import lejos.utility.Stopwatch;
 
 /**
  * キャリブレーションを実行し走行戦略の判定処理を呼び出す
@@ -87,14 +86,9 @@ public class start implements Runnable {
 			// ev3.controlBalance(0, 0, 0);
 			// Delay.msDelay(4);
 			// }
-
-			Stopwatch sw = new Stopwatch();
-	
-			sw.reset();
-			while (sw.elapsed() > 1000) {
-				Delay.msDelay(10);
-				EV3.getInstance().controlBalance(0, 0, 104);
-			}
+			
+			EV3.getInstance().controlBalance(10, 10, 94);
+			Delay.msDelay(100);
 			
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);
 
