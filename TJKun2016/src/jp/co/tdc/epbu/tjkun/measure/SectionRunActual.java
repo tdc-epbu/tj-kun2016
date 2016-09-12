@@ -17,12 +17,11 @@ public class SectionRunActual {
 		this.calibrater = calibrater;
 	}
 
-	public boolean notify(Condition condition){
+	public boolean notify(Condition condition) throws InterruptedException{
 		boolean notify = false;
 		switch (condition.getConditionType()){
 		case DISTANCE:
 			// 回転数
-
 			int motorCount = Math.abs(ev3Control.getLMotorCount() - initMotorCount);
 			if (condition.getConditionValue() <= motorCount) {
 				notify = true;
@@ -35,14 +34,17 @@ public class SectionRunActual {
 			}
 			break;
 		case GRAY_DETECTION:
-			if (condition.getConditionValue() <= calibrater.grayBaseline()) {
-				Thread.sleep(1000);
-				if(condition.getConditionValue() <= calibrater.grayBaseline()){
+			int i = 0;
+			while (i < 10){ //1秒間の間に10回灰色検知を行い、全てtrueであれば値を返す。
+				if (condition.getConditionValue() <= calibrater.grayBaseline()) {
+					Thread.sleep(100);
+				  i++;
+				} else{
+					break;
+				}
 				notify = true;
 				}
 			}
-			}
-
 		return notify;
 	}
 	public void start(){
