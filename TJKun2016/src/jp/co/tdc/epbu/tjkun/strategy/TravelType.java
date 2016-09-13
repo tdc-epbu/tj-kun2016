@@ -13,5 +13,6 @@ public enum TravelType {
 	JAGGY,
 	TAIL,
 	TAILDOWN,
+	TAILCONTROL,
 	END;
 }
