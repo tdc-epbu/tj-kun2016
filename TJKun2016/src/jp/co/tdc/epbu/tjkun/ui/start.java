@@ -33,7 +33,7 @@ public class start implements Runnable {
 	private DriveStrategy driveStrategy;
 
 	private Course cource;
-	
+
 	public static void main(String[] args) {
 
 		start starti = new start();
@@ -45,39 +45,39 @@ public class start implements Runnable {
 	public void starter() {
 
 		EV3 ev3 = EV3.getInstance();
-		
+
 		try {
 
 			scheduler = Executors.newScheduledThreadPool(3);
-			
+
 
 			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
 			ev3.controlDirect(0, 0, 0);
-			
+
 			// キャリブレーション実行
 			Button button = new Button(ev3);
 			Calibrater calibrater = new Calibrater(ev3, button);
 			calibrater.calibration();
-			
+
 
 
 			driveStrategy = new DriveStrategyImpl(calibrater);
 
-			
+
 			cource = CourceFactory.create(CourceType.RIGHT);
-			
+
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
 			ev3.reset();
 			Sound.beep();
-			
+
 
 			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 500, TimeUnit.MILLISECONDS);
 
 			// 尻尾を停止位置へ固定しスタート準備
 			while (button.touchStatus() != TouchStatus.Released
 					&& !RemoteTask.getInstance().checkRemoteCommand(RemoteTask.REMOTE_COMMAND_START)) {
-				ev3.controlDirect(0, 0, 91);
+				ev3.controlDirect(0, 0, 96);
 				Delay.msDelay(10);
 			}
 
@@ -86,10 +86,10 @@ public class start implements Runnable {
 			// ev3.controlBalance(0, 0, 0);
 			// Delay.msDelay(4);
 			// }
-			
-			EV3.getInstance().controlBalance(10, 10, 94);
+
+			EV3.getInstance().controlBalance(2, 2, 90);
 			Delay.msDelay(100);
-			
+
 			futureDrive = scheduler.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);
 
 			while (button.touchStatus() != TouchStatus.Released
@@ -125,7 +125,17 @@ public class start implements Runnable {
 
 	@Override
 	public void run() {
-		driveStrategy.operate(cource);
+		try {
+			driveStrategy.operate(cource);
+
+		while(true) {
+			EV3.getInstance().controlDirect(0, 0, 90);
+			Delay.msDelay(100);
+		}
+		} catch (InterruptedException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
-	
+
 }

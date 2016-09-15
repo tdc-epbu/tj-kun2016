@@ -2,7 +2,6 @@ package jp.co.tdc.epbu.tjkun.drive;
 
 import jp.co.tdc.epbu.tjkun.device.EV3;
 import jp.co.tdc.epbu.tjkun.measure.Calibrater;
-import lejos.hardware.lcd.LCD;
 import lejos.utility.Stopwatch;
 
 public class TravelPidImpl implements Travel {
@@ -31,8 +30,13 @@ public class TravelPidImpl implements Travel {
 		this.diff[0] = 0;
 		this.diff[1] = 0;
 
+
+
 		stopwatch = new Stopwatch();
 
+		for(int i = 0; i < 1500; i++) {
+			CalcTurnValue(0.0f);
+		}
 	}
 
 
@@ -51,7 +55,7 @@ public class TravelPidImpl implements Travel {
 
 		float temp = ev3.getBrightness();
 
-		LCD.drawString(Float.toString(temp), 0, 1);
+		//LCD.drawString(Float.toString(temp), 0, 1);
 
 		return (((temp - calibrater.blackBaseline()) / (calibrater.whiteBaseline() - calibrater.blackBaseline()))
 				* 100.0f);
@@ -66,11 +70,11 @@ public class TravelPidImpl implements Travel {
 	 */
 	private float CalcTurnValue(float nowLight) {
 
-		LCD.drawString(Float.toString(nowLight), 0, 2);
+		//LCD.drawString(Float.toString(nowLight), 0, 2);
 
-		nowLight = 0.95f * nowLight + 0.05f * passLight; 
+		nowLight = 0.95f * nowLight + 0.05f * passLight;
 		passLight = nowLight;
-		
+
 		float tm = stopwatch.elapsed() / 250.0f;
 
 		float P, I, D; // P,I,Dの値
@@ -90,7 +94,7 @@ public class TravelPidImpl implements Travel {
 		// 回転量を算出する。
 		turn = (int) (P + I + D);
 
-		LCD.drawString("P+I+D：" + Float.toString(turn), 0, 5);
+		//LCD.drawString("P+I+D：" + Float.toString(turn), 0, 5);
 		stopwatch.reset();
 		// 回転量を返す。
 		return MathLimit(turn, this.maxPid, -this.maxPid);

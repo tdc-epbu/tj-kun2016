@@ -12,7 +12,6 @@ import jp.co.tdc.epbu.tjkun.drive.TravelTailImpl;
 import jp.co.tdc.epbu.tjkun.measure.Calibrater;
 import jp.co.tdc.epbu.tjkun.section.Course;
 import jp.co.tdc.epbu.tjkun.section.Section;
-import lejos.utility.Delay;
 
 /**
  * @author Takayuki
@@ -42,7 +41,7 @@ public class DriveStrategyImpl implements DriveStrategy {
 	}
 
 	@Override
-	public void operate(Course cource) {
+	public void operate(Course cource) throws InterruptedException {
 
 		while (true) {
 
@@ -52,7 +51,8 @@ public class DriveStrategyImpl implements DriveStrategy {
 			if (section.getTravelType().equals(TravelType.END)) {
 				break;
 			}
-			Delay.msDelay(6);
+			Thread.sleep(6);
+			//Delay.msDelay(6);
 
 
 			switch (section.getTravelType()) {
@@ -73,7 +73,8 @@ public class DriveStrategyImpl implements DriveStrategy {
 				break;
 			default:
 			}
-			Delay.msDelay(8);
+			Thread.sleep(8);
+			//Delay.msDelay(8);
 
 			//EV3.getInstance().run();
 

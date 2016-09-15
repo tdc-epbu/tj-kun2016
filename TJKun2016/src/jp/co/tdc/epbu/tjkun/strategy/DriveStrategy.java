@@ -11,7 +11,8 @@ import jp.co.tdc.epbu.tjkun.section.Course;
  */
 public interface DriveStrategy {
 
-	/** 指示する */
-	public void operate(Course cource);
+	/** 指示する
+	 * @throws InterruptedException */
+	public void operate(Course cource) throws InterruptedException;
 
 }
