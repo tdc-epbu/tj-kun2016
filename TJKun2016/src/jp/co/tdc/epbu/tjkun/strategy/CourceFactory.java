@@ -54,6 +54,9 @@ public class CourceFactory {
 		WheelSpeed speed1 = new WheelSpeed(20, 20);
 		Condition condition1 = new Condition(ConditionType.OBSTACLES_DETECTION, 0.1f);
 		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
+		WheelSpeed speed1_2 = new WheelSpeed(20, 20);
+		Condition condition1_2 = new Condition(ConditionType.TAIL_ANGLE, 65);
+		sectionList.add(new Section(speed1_2, TravelType.TAILCONTROL, condition1_2, null));
 		//尻尾下ろし
 		WheelSpeed speed2 = new WheelSpeed(0, 0);
 		Condition condition2 = new Condition(ConditionType.TAIL_ANGLE, 66);

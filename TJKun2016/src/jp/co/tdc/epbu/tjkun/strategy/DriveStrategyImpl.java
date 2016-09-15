@@ -35,7 +35,7 @@ public class DriveStrategyImpl implements DriveStrategy {
 		jaggy = new TravelJaggyImpl(this.calibrater);
 		tail = new TravelTailImpl(this.calibrater);
 		taildown = new TravelTailDownImpl(this.calibrater);
-		tailControl = new TravelTailControlRun(30);
+		tailControl = new TravelTailControlRun(65);
 
 
 		//sw = new Stopwatch();
