@@ -55,15 +55,27 @@ public class CourceFactory {
 		Condition condition1 = new Condition(ConditionType.OBSTACLES_DETECTION, 0.1f);
 		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
 		//尻尾下ろし
-		WheelSpeed speed2 = new WheelSpeed(0, 0);
-		Condition condition2 = new Condition(ConditionType.TAIL_ANGLE, 66);
-		sectionList.add(new Section(speed2, TravelType.TAILDOWN, condition2, null));
+		WheelSpeed speed2 = new WheelSpeed(-30, -30);
+		Condition condition2 = new Condition(ConditionType.TIME, 500);
+		sectionList.add(new Section(speed2, TravelType.TAILCONTROL, condition2, null));
+		//尻尾下ろし
+		WheelSpeed speed2_2 = new WheelSpeed(0, 0);
+		Condition condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 80);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 75);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 70);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 65);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+
 		//前進
 		WheelSpeed speed3 = new WheelSpeed(20, 20);
 		Condition condition3 = new Condition(ConditionType.DISTANCE, 900);
 		sectionList.add(new Section(speed3, TravelType.TAIL, condition3, null));
-		//旋回
-		WheelSpeed speed4 = new WheelSpeed(-20, -19);
+		//後退
+		WheelSpeed speed4 = new WheelSpeed(-20, -20);
 		Condition condition4 = new Condition(ConditionType.DISTANCE, 1000);
 		sectionList.add(new Section(speed4, TravelType.TAIL, condition4, null));
 //		WheelSpeed speed4 = new WheelSpeed(50, -50);
@@ -78,8 +90,8 @@ public class CourceFactory {
 //		Condition condition6 = new Condition(ConditionType.DISTANCE, 250);
 //		sectionList.add(new Section(speed6, TravelType.TAIL, condition6, null));
 		//前進(車庫まで)
-		WheelSpeed speed7 = new WheelSpeed(30, 30);
-		Condition condition7 = new Condition(ConditionType.DISTANCE, 1550);
+		WheelSpeed speed7 = new WheelSpeed(20, 20);
+		Condition condition7 = new Condition(ConditionType.DISTANCE, 1400);
 		sectionList.add(new Section(speed7, TravelType.TAIL, condition7, null));
 		//ストップ
 		WheelSpeed speed8 = new WheelSpeed(0, 0);

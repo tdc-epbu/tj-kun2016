@@ -19,22 +19,20 @@ public class TravelTailDownImpl implements Travel {
 		int tail_up = 66;
 		int tail_down = 90;
 		
-		if(state ==  tail_down) {
-			ev3.controlBalance(0, 0, state);
-			state--;
-			return;
-		}
-
-		if(state-1 ==  tail_down) {
-			Delay.msDelay(1000);
-			ev3.controlDirect(30, 30, state) ;
-			state--;
-			return;
-		}
+//		if(state ==  tail_down) {
+////			ev3.controlBalance(0, 0, state);
+//			state--;
+//			return;
+//		}
+//
+//		if(state-1 ==  tail_down) {
+//			ev3.controlDirect(10, 10, state) ;
+//			state--;
+//			return;
+//		}
 
 		ev3.controlDirect(0, 0, state) ;
-
-		Delay.msDelay(500);
+		Delay.msDelay(100);
 		if(state >= tail_up ) {
 			state--;
 		}

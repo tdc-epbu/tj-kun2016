@@ -13,7 +13,7 @@ public class TravelTailImpl implements Travel {
 	public void travel(WheelSpeed speed) {
 		int left = speed.getWheelSpeedScaleLeft();
 		int right = speed.getWheelSpeedScaleRight();
-		int tail = 66;
+		int tail = 63;
 		ev3.controlDirect(left, right, tail) ;
 	}
 }
