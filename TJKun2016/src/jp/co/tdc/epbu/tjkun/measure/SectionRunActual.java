@@ -8,7 +8,8 @@ public class SectionRunActual {
 
 	private EV3Control ev3Control;
 
-	Stopwatch time = new Stopwatch();
+	Stopwatch time            = new Stopwatch();
+	Stopwatch blackUndetected = new Stopwatch();
 	int initMotorCount;
 
 	public SectionRunActual(EV3Control ev3Control) {
@@ -33,9 +34,20 @@ public class SectionRunActual {
 			}
 			break;
 		case OBSTACLES_DETECTION:
-			// 未実装
 			if (ev3Control.getSonarDistance() < 0.3) { // 閾値は仮設定
 				return true;
+			}
+			break;
+		case GRAY_DETECTION: //黒未検出の判定
+				if (condition.getConditionValue() <= 0.1) {
+					notify = false;
+					blackUndetected.reset();
+				} else{
+					if (blackUndetected.elapsed() <= 2000) {
+						notify = false;
+					} else{
+						notify = true;
+				}
 			}
 			break;
 		case TAIL_ANGLE:
