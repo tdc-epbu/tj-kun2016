@@ -5,7 +5,6 @@
  */
 package jp.co.tdc.epbu.tjkun.device;
 
-import jp.co.tdc.epbu.tjkun.sample.RemoteTask;
 import jp.etrobo.ev3.balancer.Balancer;
 import lejos.hardware.Battery;
 import lejos.hardware.port.BasicMotorPort;
@@ -81,7 +80,7 @@ public class EV3 implements Runnable, EV3Control {
 	private int driveCallCounter = 0;
 
 	private float brightness;
-	
+
 	private boolean balance;
 
 	private int leftMotorPower;
@@ -185,7 +184,6 @@ public class EV3 implements Runnable, EV3Control {
 		colorSensor.setFloodlight(false);
 		sonar.disable();
 
-		RemoteTask.getInstance().close();
 
 	}
 
@@ -249,7 +247,7 @@ public class EV3 implements Runnable, EV3Control {
 	 * @return 輝度値。
 	 */
 	public final float getBrightness() {
-		//redMode.fetchSample(sampleLight, 0);
+		redMode.fetchSample(sampleLight, 0);
 		return sampleLight[0];
 	}
 
@@ -274,9 +272,9 @@ public class EV3 implements Runnable, EV3Control {
 			driveCallCounter = 0;
 		}
 
-		redMode.fetchSample(sampleLight, 0);
+		//redMode.fetchSample(sampleLight, 0);
 
-		
+
 		if (balance) {
 			float gyroNow = getGyroValue(); // ジャイロセンサー値
 			int thetaL = motorPortL.getTachoCount(); // 左モータ回転角度
@@ -318,7 +316,7 @@ public class EV3 implements Runnable, EV3Control {
 
 	@Override
 	public int getTailAngle() {
-		
+
 		return motorPortT.getTachoCount();
 	}
 }
