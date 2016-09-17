@@ -35,11 +35,35 @@ public class CourceFactory {
 		case STAIRS:
 			sectionList = createStairsCource();
 			break;
+		case LEFT_GARAGE:
+			sectionList = createLeftGarageCource();
+			break;
 		default:
 			sectionList = createLeftCource();
 		}
 
 		return new Course(sectionList);
+	}
+
+	private static List<Section> createLeftGarageCource() {
+
+		List<Section> sectionList = new ArrayList<>();
+
+		//スタート
+		WheelSpeed speed0 = new WheelSpeed(10, 10);
+		Condition condition0 = new Condition(ConditionType.TIME, 3000);
+		sectionList.add(new Section(speed0, TravelType.PID, condition0, null));
+		//スタート
+		WheelSpeed speed1 = new WheelSpeed(10, 10);
+		Condition condition1 = new Condition(ConditionType.GRAY_DETECTION, 0);
+		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
+		//ストップ
+		WheelSpeed speed9 = new WheelSpeed(0, 0);
+		Condition condition9 = new Condition(ConditionType.TIME, 5000);
+		sectionList.add(new Section(speed9, TravelType.END, condition9, null));
+
+
+		return sectionList;
 	}
 
 	private static List<Section> createGateCource() {
