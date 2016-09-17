@@ -63,20 +63,20 @@ public class CourceFactory {
 		Condition condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 80);
 		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
 
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 78);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
 		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 75);
 		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
-		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 70);
-		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
-		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 65);
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 73);
 		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
 
 		//前進
 		WheelSpeed speed3 = new WheelSpeed(20, 20);
-		Condition condition3 = new Condition(ConditionType.DISTANCE, 900);
+		Condition condition3 = new Condition(ConditionType.DISTANCE, 350);
 		sectionList.add(new Section(speed3, TravelType.TAIL, condition3, null));
 		//後退
-		WheelSpeed speed4 = new WheelSpeed(-20, -20);
-		Condition condition4 = new Condition(ConditionType.DISTANCE, 1000);
+		WheelSpeed speed4 = new WheelSpeed(-20, -21);
+		Condition condition4 = new Condition(ConditionType.DISTANCE, 480);
 		sectionList.add(new Section(speed4, TravelType.TAIL, condition4, null));
 //		WheelSpeed speed4 = new WheelSpeed(50, -50);
 //		Condition condition4 = new Condition(ConditionType.DISTANCE, 250);
@@ -91,7 +91,7 @@ public class CourceFactory {
 //		sectionList.add(new Section(speed6, TravelType.TAIL, condition6, null));
 		//前進(車庫まで)
 		WheelSpeed speed7 = new WheelSpeed(20, 20);
-		Condition condition7 = new Condition(ConditionType.DISTANCE, 1400);
+		Condition condition7 = new Condition(ConditionType.DISTANCE, 1250);
 		sectionList.add(new Section(speed7, TravelType.TAIL, condition7, null));
 		//ストップ
 		WheelSpeed speed8 = new WheelSpeed(0, 0);
@@ -109,27 +109,31 @@ public class CourceFactory {
 
 		List<Section> sectionList = new ArrayList<>();
 
-		//衝突まで
-		WheelSpeed speed1 = new WheelSpeed(30, 30);
-		Condition condition1 = new Condition(ConditionType.TIME, 2000);
-		sectionList.add(new Section(speed1, TravelType.PID, condition1, null));
+		//尻尾下ろし
+		WheelSpeed speed2 = new WheelSpeed(-30, -30);
+		Condition condition2 = new Condition(ConditionType.TIME, 500);
+		sectionList.add(new Section(speed2, TravelType.TAILCONTROL, condition2, null));
+		//尻尾下ろし
+		WheelSpeed speed2_2 = new WheelSpeed(0, 0);
+		Condition condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 80);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
 
-		//ストレート
-		WheelSpeed speed2 = new WheelSpeed(90, 90);
-		Condition condition2 = new Condition(ConditionType.DISTANCE, 3300);
-		sectionList.add(new Section(speed2, TravelType.PID, condition2, null));
-		//ストレート
-		WheelSpeed speed3 = new WheelSpeed(75, 75);
-		Condition condition3 = new Condition(ConditionType.DISTANCE, 1000);
-		sectionList.add(new Section(speed3, TravelType.PID, condition3, null));
-		//ストレート
-		WheelSpeed speed4 = new WheelSpeed(90, 90);
-		Condition condition4 = new Condition(ConditionType.DISTANCE, 2100);
-		sectionList.add(new Section(speed4, TravelType.PID, condition4, null));
-		//ストレート
-		WheelSpeed speed5 = new WheelSpeed(40, 40);
-		Condition condition5 = new Condition(ConditionType.DISTANCE, 450);
-		sectionList.add(new Section(speed5, TravelType.PID, condition5, null));
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 78);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 75);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+		condition2_2 = new Condition(ConditionType.TAIL_ANGLE, 73);
+		sectionList.add(new Section(speed2_2, TravelType.TAILDOWN, condition2_2, null));
+
+		//前進(車庫まで)
+		WheelSpeed speed7 = new WheelSpeed(20, 20);
+		Condition condition7 = new Condition(ConditionType.DISTANCE, 150);
+		sectionList.add(new Section(speed7, TravelType.TAIL, condition7, null));
+		//ストップ
+		WheelSpeed speed8 = new WheelSpeed(0, 0);
+		Condition condition8 = new Condition(ConditionType.DISTANCE, 6000);
+		sectionList.add(new Section(speed8, TravelType.TAIL, condition8, null));
+		
 		return sectionList;
 	}
 
@@ -229,11 +233,11 @@ public class CourceFactory {
 		sectionList.add(new Section(speed5_2, TravelType.PID, condition5_2, null));
 		//ストレート
 		WheelSpeed speed5_3 = new WheelSpeed(40, 40);
-		Condition condition5_3 = new Condition(ConditionType.DISTANCE, 500);
+		Condition condition5_3 = new Condition(ConditionType.DISTANCE, 550);
 		sectionList.add(new Section(speed5_3, TravelType.PID, condition5_3, null));
 		//ストレート
 		WheelSpeed speed6 = new WheelSpeed(90, 90);
-		Condition condition6 = new Condition(ConditionType.DISTANCE, 1900);
+		Condition condition6 = new Condition(ConditionType.DISTANCE, 1850);
 		sectionList.add(new Section(speed6, TravelType.PID, condition6, null));
 		//ストレート
 		WheelSpeed speed7 = new WheelSpeed(75, 75);
@@ -244,19 +248,15 @@ public class CourceFactory {
 		Condition condition8 = new Condition(ConditionType.DISTANCE, 1700);
 		sectionList.add(new Section(speed8, TravelType.PID, condition8, null));
 		//ストレート
-		WheelSpeed speed9 = new WheelSpeed(45, 45);
+		WheelSpeed speed9 = new WheelSpeed(25, 25);
 		Condition condition9 = new Condition(ConditionType.DISTANCE, 1200);
 		sectionList.add(new Section(speed9, TravelType.PID, condition9, null));
 		//ストップ
 //		WheelSpeed speed10 = new WheelSpeed(0, 0);
 //		Condition condition10 = new Condition(ConditionType.DISTANCE, 5000);
 //		sectionList.add(new Section(speed10, TravelType.PID, condition10, null));
-		//ストップ
-		WheelSpeed speed11 = new WheelSpeed(0, 0);
-		Condition condition11 = new Condition(ConditionType.TIME, 1000);
-		sectionList.add(new Section(speed11, TravelType.END, condition11, null));
 
-		//sectionList.addAll(createStairsCource());
+		sectionList.addAll(createStairsCource());
 
 		return sectionList;
 	}
