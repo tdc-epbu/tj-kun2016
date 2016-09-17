@@ -16,6 +16,7 @@ import jp.co.tdc.epbu.tjkun.strategy.CourceType;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategy;
 import jp.co.tdc.epbu.tjkun.strategy.DriveStrategyImpl;
 import lejos.hardware.Sound;
+import lejos.hardware.lcd.LCD;
 import lejos.utility.Delay;
 
 /**
@@ -34,11 +35,16 @@ public class start implements Runnable {
 
 	private Course cource;
 
+	Button button;
+	Calibrater calibrater;
+
+	boolean endFlag;
+
 	public static void main(String[] args) {
 
 		start starti = new start();
 
-		starti.starter();
+		starti.control();
 
 	}
 
@@ -50,27 +56,22 @@ public class start implements Runnable {
 
 			scheduler = Executors.newScheduledThreadPool(3);
 
-
 			futureDrive = scheduler.scheduleAtFixedRate(ev3, 0, 4, TimeUnit.MILLISECONDS);
 			ev3.controlDirect(0, 0, 0);
 
-			// キャリブレーション実行
-			Button button = new Button(ev3);
-			Calibrater calibrater = new Calibrater(ev3, button);
-			calibrater.calibration();
-
-
-
 			driveStrategy = new DriveStrategyImpl(calibrater);
-
 
 			cource = CourceFactory.create(CourceType.GATE);
 
 			// PIDDriver pidDriver = new PIDDriver(ev3, calibrater);
 
+			LCD.drawString("Start Wait", 0, 3);
+			while (button.touchStatus() != TouchStatus.Released) {
+				Delay.msDelay(10);
+			}
+
 			ev3.reset();
 			Sound.beep();
-
 
 			futureRemote = scheduler.scheduleAtFixedRate(RemoteTask.getInstance(), 0, 500, TimeUnit.MILLISECONDS);
 
@@ -103,6 +104,12 @@ public class start implements Runnable {
 			// DriveStrategy drivestrategy = new DriveStrategyImpl();
 			// drivestrategy.operate();
 
+			while (button.touchStatus() != TouchStatus.Released
+					&& !RemoteTask.getInstance().checkRemoteCommand(RemoteTask.REMOTE_COMMAND_STOP)) {
+				endFlag  = lejos.hardware.Button.DOWN.isDown();
+				Delay.msDelay(250);
+			}
+
 		} finally {
 
 			if (futureStart != null) {
@@ -117,10 +124,35 @@ public class start implements Runnable {
 				futureRemote.cancel(true);
 			}
 
-			ev3.close();
-
 			scheduler.shutdownNow();
 		}
+	}
+
+	public void control() {
+
+		// キャリブレーション実行
+		this.button = new Button(EV3.getInstance());
+		this.calibrater = new Calibrater(EV3.getInstance(), button);
+		while(this.calibrater.calibration()) {
+
+		}
+
+		while (true) {
+
+
+			this.starter();
+
+			if (endFlag) {
+				break;
+			}
+
+
+			LCD.clear();
+		}
+
+		RemoteTask.getInstance().close();
+		EV3.getInstance().close();
+
 	}
 
 	@Override
@@ -128,10 +160,10 @@ public class start implements Runnable {
 		try {
 			driveStrategy.operate(cource);
 
-		while(true) {
-			EV3.getInstance().controlDirect(0, 0, 90);
-			Delay.msDelay(100);
-		}
+//			while (true) {
+//				EV3.getInstance().controlDirect(0, 0, 90);
+//				Delay.msDelay(100);
+//			}
 		} catch (InterruptedException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
